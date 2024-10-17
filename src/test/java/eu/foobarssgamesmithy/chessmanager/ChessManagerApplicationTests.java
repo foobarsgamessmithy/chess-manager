@@ -31,8 +31,13 @@ class ChessManagerApplicationTests {
 	@Test
 	void createMatch_shouldReturnOk() throws Exception {
 		// Arrange
+		String playedAt = ZonedDateTime.now().toString();
 		MatchDto match = new MatchDto();
-		match.setPlayedAt(ZonedDateTime.now().toString());
+		match.setPlayedAt(playedAt);
+
+		MatchDto expected = new MatchDto();
+		expected.setPlayedAt(playedAt);
+		expected.setId(1);
 
 		// Act
 		ResultActions result = mockMvc.perform(post("/api/match")
@@ -45,7 +50,7 @@ class ChessManagerApplicationTests {
 				.readValue(result.andReturn().getResponse().getContentAsString(), MatchDto.class);
 		assertThat(actual)
 				.usingRecursiveComparison()
-				.isEqualTo(match);
+				.isEqualTo(expected);
 
 	}
 
