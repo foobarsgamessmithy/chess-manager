@@ -23,7 +23,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-modules-java8
+	runtimeOnly 'com.fasterxml.jackson.module:jackson-modules-java8:2.18.0'
+
 	runtimeOnly 'com.h2database:h2:2.3.232'
+//	compileOnly 'org.projectlombok:lombok:1.18.34'
+
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'

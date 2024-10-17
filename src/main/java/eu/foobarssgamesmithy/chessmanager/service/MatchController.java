@@ -1,17 +1,17 @@
 package eu.foobarssgamesmithy.chessmanager.service;
 
+import eu.foobarssgamesmithy.chessmanager.service.dto.MatchDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MatchController {
 
     @PostMapping("/api/match")
-    public ResponseEntity<String> createMatch(){
-        return ResponseEntity.ok().build();
+    public ResponseEntity<MatchDto> createMatch(
+            @RequestBody MatchDto matchDto
+            ){
+        return ResponseEntity.ok().body(matchDto);
     }
 
     @GetMapping("/api/match")
