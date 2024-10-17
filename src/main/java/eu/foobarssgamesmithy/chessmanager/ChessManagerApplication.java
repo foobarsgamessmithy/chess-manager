@@ -1,13 +1,13 @@
-package eu.foobarsgamesmithy.chessmanager;
+package eu.foobarssgamesmithy.chessmanager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ChessmanagerApplication {
+public class ChessManagerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ChessmanagerApplication.class, args);
+		SpringApplication.run(ChessManagerApplication.class, args);
 	}
 
 }
