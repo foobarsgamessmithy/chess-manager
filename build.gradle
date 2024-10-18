@@ -23,11 +23,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	// https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-modules-java8
-	runtimeOnly 'com.fasterxml.jackson.module:jackson-modules-java8:2.18.0'
+	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct
+	implementation 'org.mapstruct:mapstruct:1.6.2'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2', "org.projectlombok:lombok:1.18.34"
+
 
 	runtimeOnly 'com.h2database:h2:2.3.232'
-//	compileOnly 'org.projectlombok:lombok:1.18.34'
+	compileOnly 'org.projectlombok:lombok:1.18.34'
 
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

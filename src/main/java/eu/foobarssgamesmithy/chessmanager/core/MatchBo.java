@@ -1,26 +1,17 @@
 package eu.foobarssgamesmithy.chessmanager.core;
 
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Data;
+
 import java.time.ZonedDateTime;
 
+@Builder(access = AccessLevel.PUBLIC)
+@Data
 public class MatchBo {
 
     private Long id;
 
     private ZonedDateTime playedAt;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public ZonedDateTime getPlayedAt() {
-        return playedAt;
-    }
-
-    public void setPlayedAt(ZonedDateTime playedAt) {
-        this.playedAt = playedAt;
-    }
 }

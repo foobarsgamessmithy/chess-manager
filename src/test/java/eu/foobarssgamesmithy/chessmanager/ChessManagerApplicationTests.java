@@ -1,6 +1,7 @@
 package eu.foobarssgamesmithy.chessmanager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eu.foobarssgamesmithy.chessmanager.fixtures.MatchDtoFixtures;
 import eu.foobarssgamesmithy.chessmanager.service.dto.MatchDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.net.http.HttpClient;
 import java.time.ZonedDateTime;
-import java.util.Optional;
-import java.util.concurrent.Executor;
 
+import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.formatZonedDateTimeForDto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -31,13 +29,14 @@ class ChessManagerApplicationTests {
 	@Test
 	void createMatch_shouldReturnOk() throws Exception {
 		// Arrange
-		String playedAt = ZonedDateTime.now().toString();
-		MatchDto match = new MatchDto();
-		match.setPlayedAt(playedAt);
+		ZonedDateTime playedAt = ZonedDateTime.now();
+		MatchDto match = MatchDtoFixtures.aMatch();
+		match.setPlayedAt(playedAt.toString());
 
-		MatchDto expected = new MatchDto();
-		expected.setPlayedAt(playedAt);
-		expected.setId(1);
+		MatchDto expected = MatchDtoFixtures.aMatch();
+
+		expected.setPlayedAt(formatZonedDateTimeForDto(playedAt));
+		expected.setId(1L);
 
 		// Act
 		ResultActions result = mockMvc.perform(post("/api/match")

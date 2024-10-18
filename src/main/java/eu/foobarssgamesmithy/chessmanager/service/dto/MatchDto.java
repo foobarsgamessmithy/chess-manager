@@ -1,26 +1,19 @@
 package eu.foobarssgamesmithy.chessmanager.service.dto;
 
-import java.time.ZonedDateTime;
+import lombok.*;
 
+@Builder
+@Data
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class MatchDto {
 
-    private Integer id;
+    private Long id;
 
     private String playedAt;
 
-    public Integer getId() {
-        return id;
-    }
+    private PlayedPieces playedWith;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private ResultDto result;
 
-    public String getPlayedAt() {
-        return playedAt;
-    }
-
-    public void setPlayedAt(String playedAt) {
-        this.playedAt = playedAt;
-    }
 }

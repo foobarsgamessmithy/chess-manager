@@ -2,30 +2,33 @@ package eu.foobarssgamesmithy.chessmanager.service;
 
 import eu.foobarssgamesmithy.chessmanager.core.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.core.MatchManager;
+import eu.foobarssgamesmithy.chessmanager.core.mapper.DtoBoMapper;
 import eu.foobarssgamesmithy.chessmanager.service.dto.MatchDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.time.ZonedDateTime;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MatchController {
 
     private final MatchManager matchManager;
 
-    public MatchController(MatchManager matchManager) {
+    private final DtoBoMapper mapper;
+
+    public MatchController(MatchManager matchManager, DtoBoMapper mapper) {
         this.matchManager = matchManager;
+        this.mapper = mapper;
     }
 
     @PostMapping("/api/match")
     public ResponseEntity<MatchDto> createMatch(
             @RequestBody MatchDto matchDto
             ){
-        MatchBo match = new MatchBo();
-        match.setPlayedAt(ZonedDateTime.parse( matchDto.getPlayedAt()));
-        match =  this.matchManager.saveMatch(match);
-        matchDto.setId(Math.toIntExact(match.getId()));
-        return ResponseEntity.ok().body(matchDto);
+        MatchBo match = this.mapper.mapMatch(matchDto);
+        match = this.matchManager.saveMatch(match);
+        return ResponseEntity.ok().body(this.mapper.mapMatch(match));
     }
 
     @GetMapping("/api/match")
