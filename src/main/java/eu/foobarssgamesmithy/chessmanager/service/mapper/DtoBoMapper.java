@@ -1,4 +1,4 @@
-package eu.foobarssgamesmithy.chessmanager.core.mapper;
+package eu.foobarssgamesmithy.chessmanager.service.mapper;
 
 import eu.foobarssgamesmithy.chessmanager.core.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.service.dto.MatchDto;

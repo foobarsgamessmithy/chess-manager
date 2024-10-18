@@ -2,7 +2,7 @@ package eu.foobarssgamesmithy.chessmanager.service;
 
 import eu.foobarssgamesmithy.chessmanager.core.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.core.MatchManager;
-import eu.foobarssgamesmithy.chessmanager.core.mapper.DtoBoMapper;
+import eu.foobarssgamesmithy.chessmanager.service.mapper.DtoBoMapper;
 import eu.foobarssgamesmithy.chessmanager.service.dto.MatchDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
