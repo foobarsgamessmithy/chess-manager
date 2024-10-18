@@ -1,5 +1,6 @@
 package eu.foobarssgamesmithy.chessmanager.core;
 
+import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
 import eu.foobarssgamesmithy.chessmanager.persistence.MatchRepository;
 import eu.foobarssgamesmithy.chessmanager.persistence.entity.MatchEntity;

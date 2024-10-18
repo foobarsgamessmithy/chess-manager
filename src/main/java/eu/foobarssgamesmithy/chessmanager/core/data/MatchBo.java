@@ -1,5 +1,6 @@
-package eu.foobarssgamesmithy.chessmanager.core;
+package eu.foobarssgamesmithy.chessmanager.core.data;
 
+import eu.foobarssgamesmithy.chessmanager.service.dto.PlayedPieces;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
@@ -13,5 +14,9 @@ public class MatchBo {
     private Long id;
 
     private ZonedDateTime playedAt;
+
+    private PlayedPieces playedWith;
+
+    private ResultBo result;
 
 }

@@ -1,6 +1,6 @@
 package eu.foobarssgamesmithy.chessmanager.service;
 
-import eu.foobarssgamesmithy.chessmanager.core.MatchBo;
+import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.core.MatchManager;
 import eu.foobarssgamesmithy.chessmanager.service.mapper.DtoBoMapper;
 import eu.foobarssgamesmithy.chessmanager.service.dto.MatchDto;

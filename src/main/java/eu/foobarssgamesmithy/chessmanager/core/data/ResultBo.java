@@ -1,4 +1,4 @@
-package eu.foobarssgamesmithy.chessmanager.service.dto;
+package eu.foobarssgamesmithy.chessmanager.core.data;
 
 import lombok.*;
 
@@ -6,7 +6,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-public class ResultDto {
+public class ResultBo {
 
     private double pointsWhite;
 

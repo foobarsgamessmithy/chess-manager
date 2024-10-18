@@ -1,6 +1,8 @@
 package eu.foobarssgamesmithy.chessmanager.fixtures;
 
-import eu.foobarssgamesmithy.chessmanager.core.MatchBo;
+import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
+import eu.foobarssgamesmithy.chessmanager.core.data.ResultBo;
+import eu.foobarssgamesmithy.chessmanager.service.dto.PlayedPieces;
 
 import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.PLAYED_AT;
 
@@ -10,6 +12,15 @@ public class MatchBoFixtures {
         return MatchBo.builder()
                 .id(100L)
                 .playedAt(PLAYED_AT)
+                .playedWith(PlayedPieces.WHITE)
+                .result(aResult())
+                .build();
+    }
+
+    public static ResultBo aResult(){
+        return ResultBo.builder()
+                .pointsBlack(0)
+                .pointsWhite(1)
                 .build();
     }
 }

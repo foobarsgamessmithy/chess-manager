@@ -1,6 +1,8 @@
 package eu.foobarssgamesmithy.chessmanager.fixtures;
 
 import eu.foobarssgamesmithy.chessmanager.persistence.entity.MatchEntity;
+import eu.foobarssgamesmithy.chessmanager.persistence.entity.ResultEntity;
+import eu.foobarssgamesmithy.chessmanager.service.dto.PlayedPieces;
 
 import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.PLAYED_AT;
 
@@ -10,6 +12,15 @@ public class MatchEtyFixtures {
         return MatchEntity.builder()
                 .id(100L)
                 .playedAt(PLAYED_AT)
+                .playedWith(PlayedPieces.WHITE)
+                .result(aResult())
+                .build();
+    }
+
+    public static ResultEntity aResult(){
+        return ResultEntity.builder()
+                .pointsBlack(0)
+                .pointsWhite(1)
                 .build();
     }
 

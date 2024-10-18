@@ -1,17 +1,15 @@
 package eu.foobarssgamesmithy.chessmanager.persistence.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import eu.foobarssgamesmithy.chessmanager.service.dto.PlayedPieces;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.ZonedDateTime;
 
 @Builder
 @Entity
+@Getter(AccessLevel.PUBLIC)
+@Setter(AccessLevel.PUBLIC)
 @NoArgsConstructor
 @AllArgsConstructor
 public class MatchEntity {
@@ -22,19 +20,10 @@ public class MatchEntity {
 
     private ZonedDateTime playedAt;
 
-    public Long getId() {
-        return id;
-    }
+    private PlayedPieces playedWith;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "result_id")
+    private ResultEntity result;
 
-    public ZonedDateTime getPlayedAt() {
-        return playedAt;
-    }
-
-    public void setPlayedAt(ZonedDateTime playedAt) {
-        this.playedAt = playedAt;
-    }
 }
