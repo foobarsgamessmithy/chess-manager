@@ -54,14 +54,38 @@ class ChessManagerApplicationTests {
 	}
 
 	@Test
+	void getMatch_shouldReturnNotFound() throws Exception {
+		// Act
+		ResultActions result = mockMvc.perform(get("/api/match/{id}", 0));
+
+		// Assert
+		result.andExpect(status().isNotFound());
+	}
+
+	@Test
 	void getMatch_shouldReturnOk() throws Exception {
+		// Arrange
+		MatchDto match = MatchDtoFixtures.aMatch();
+		ResultActions createdMatchResult = mockMvc.perform(post("/api/match")
+				.contentType(APPLICATION_JSON_UTF8)
+				.content(new ObjectMapper().writeValueAsString(match)));
+		createdMatchResult.andExpect(status().isOk());
+		MatchDto createdMatch = new ObjectMapper()
+				.readValue(createdMatchResult.andReturn().getResponse().getContentAsString(), MatchDto.class);
+
+		MatchDto expected = MatchDtoFixtures.aMatch();
+		expected.setId(createdMatch.getId());
 
 		// Act
-		ResultActions result = mockMvc.perform(get("/api/match"));
+		ResultActions result = mockMvc.perform(get("/api/match/{id}", createdMatch.getId()));
 
 		// Assert
 		result.andExpect(status().isOk());
-
+		MatchDto actual = new ObjectMapper()
+				.readValue(result.andReturn().getResponse().getContentAsString(), MatchDto.class);
+		assertThat(actual)
+				.usingRecursiveComparison()
+				.isEqualTo(expected);
 	}
 
 }

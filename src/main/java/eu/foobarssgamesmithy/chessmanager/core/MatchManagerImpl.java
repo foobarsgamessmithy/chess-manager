@@ -1,10 +1,14 @@
 package eu.foobarssgamesmithy.chessmanager.core;
 
 import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
+import eu.foobarssgamesmithy.chessmanager.core.exception.MatchException;
+import eu.foobarssgamesmithy.chessmanager.core.exception.MatchExceptionFactory;
 import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
 import eu.foobarssgamesmithy.chessmanager.persistence.MatchRepository;
 import eu.foobarssgamesmithy.chessmanager.persistence.entity.MatchEntity;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class MatchManagerImpl implements MatchManager {
@@ -22,5 +26,14 @@ public class MatchManagerImpl implements MatchManager {
     public MatchBo saveMatch(MatchBo match) {
         MatchEntity entity = this.matchRepository.save(this.mapper.mapMatch(match));
         return this.mapper.mapMatch(entity);
+    }
+
+    @Override
+    public MatchBo getMatch(Long id) throws MatchException {
+        Optional<MatchEntity> matchOpt = this.matchRepository.findById(id);
+        if(!matchOpt.isPresent()){
+            throw MatchExceptionFactory.notFound(id);
+        }
+        return this.mapper.mapMatch(matchOpt.get());
     }
 }
