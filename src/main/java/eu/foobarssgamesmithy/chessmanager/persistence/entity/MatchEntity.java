@@ -7,7 +7,7 @@ import lombok.*;
 import java.time.ZonedDateTime;
 
 @Builder
-@Entity
+@Entity(name = "MATCH")
 @Getter(AccessLevel.PUBLIC)
 @Setter(AccessLevel.PUBLIC)
 @NoArgsConstructor
@@ -16,10 +16,13 @@ public class MatchEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "match_id")
     private Long id;
 
+    @Column(name = "played_at")
     private ZonedDateTime playedAt;
 
+    @Column(name = "played_with")
     private PlayedPieces playedWith;
 
     @OneToOne(cascade = CascadeType.ALL)
