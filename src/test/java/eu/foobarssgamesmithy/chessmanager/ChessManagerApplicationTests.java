@@ -12,8 +12,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
-import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.formatZonedDateTimeForDto;
+import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -34,11 +35,12 @@ class ChessManagerApplicationTests {
 		ZonedDateTime playedAt = ZonedDateTime.now();
 		MatchDto match = MatchDtoFixtures.aMatch();
 		match.setPlayedAt(playedAt.toString());
+		match.setId(null);
 
 		MatchDto expected = MatchDtoFixtures.aMatch();
 
 		expected.setPlayedAt(formatZonedDateTimeForDto(playedAt));
-		expected.setId(1L);
+		expected.setId(MATCH_UUID);
 
 		// Act
 		ResultActions result = mockMvc.perform(post("/api/match")
@@ -51,14 +53,18 @@ class ChessManagerApplicationTests {
 				.readValue(result.andReturn().getResponse().getContentAsString(), MatchDto.class);
 		assertThat(actual)
 				.usingRecursiveComparison()
+				.ignoringFieldsOfTypes(UUID.class)
 				.isEqualTo(expected);
 
 	}
 
 	@Test
 	void getMatch_shouldReturnNotFound() throws Exception {
+		// Arrange
+		UUID unknownSavedMatchId = UUID.fromString("00000000-0000-0000-0001-000000000000");
+
 		// Act
-		ResultActions result = mockMvc.perform(get("/api/match/{id}", 0));
+		ResultActions result = mockMvc.perform(get("/api/match/{id}", unknownSavedMatchId.toString()));
 
 		// Assert
 		result.andExpect(status().isNotFound());
@@ -67,19 +73,10 @@ class ChessManagerApplicationTests {
 	@Test
 	void getMatch_shouldReturnOk() throws Exception {
 		// Arrange
-		MatchDto match = MatchDtoFixtures.aMatch();
-		ResultActions createdMatchResult = mockMvc.perform(post("/api/match")
-				.contentType(APPLICATION_JSON_UTF8)
-				.content(new ObjectMapper().writeValueAsString(match)));
-		createdMatchResult.andExpect(status().isOk());
-		MatchDto createdMatch = new ObjectMapper()
-				.readValue(createdMatchResult.andReturn().getResponse().getContentAsString(), MatchDto.class);
-
-		MatchDto expected = MatchDtoFixtures.aMatch();
-		expected.setId(createdMatch.getId());
+		MatchDto expected = MatchDtoFixtures.savedMatch1();
 
 		// Act
-		ResultActions result = mockMvc.perform(get("/api/match/{id}", createdMatch.getId()));
+		ResultActions result = mockMvc.perform(get("/api/match/{id}", SAVED_MATCH_UUID_1.toString()));
 
 		// Assert
 		result.andExpect(status().isOk());

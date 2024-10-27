@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/match")
@@ -33,9 +34,9 @@ public class MatchController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MatchDto> getMatch(@PathVariable("id") Integer id){
+    public ResponseEntity<MatchDto> getMatch(@PathVariable("id") String id){
         try {
-            MatchBo match = this.matchManager.getMatch(Long.valueOf(id));
+            MatchBo match = this.matchManager.getMatch(UUID.fromString(id));
             return ResponseEntity.ok().body(this.mapper.mapMatch(match));
         } catch (MatchException e) {
             return ResponseEntity.notFound().build();
@@ -46,7 +47,7 @@ public class MatchController {
     public ResponseEntity<List<MatchDto>> getMatches(){
         try {
             // TODO fix
-            MatchBo match = this.matchManager.getMatch(1L);
+            MatchBo match = this.matchManager.getMatch(UUID.randomUUID());
             return ResponseEntity.ok().body(List.of(this.mapper.mapMatch(match)));
         } catch (MatchException e) {
             return ResponseEntity.badRequest().build();

@@ -2,13 +2,15 @@ package eu.foobarssgamesmithy.chessmanager.service.dto;
 
 import lombok.*;
 
+import java.util.UUID;
+
 @Builder
 @Data
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class MatchDto {
 
-    private Long id;
+    private UUID id;
 
     private String playedAt;
 

@@ -4,13 +4,14 @@ import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.core.data.ResultBo;
 import eu.foobarssgamesmithy.chessmanager.service.dto.PlayedPieces;
 
+import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.MATCH_UUID;
 import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.PLAYED_AT;
 
 public class MatchBoFixtures {
 
     public static MatchBo aMatch(){
         return MatchBo.builder()
-                .id(100L)
+                .id(MATCH_UUID)
                 .playedAt(PLAYED_AT)
                 .playedWith(PlayedPieces.WHITE)
                 .result(aResult())

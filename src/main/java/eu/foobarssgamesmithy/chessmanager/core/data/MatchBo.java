@@ -1,17 +1,18 @@
 package eu.foobarssgamesmithy.chessmanager.core.data;
 
 import eu.foobarssgamesmithy.chessmanager.service.dto.PlayedPieces;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 @Builder(access = AccessLevel.PUBLIC)
 @Data
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class MatchBo {
 
-    private Long id;
+    private UUID id;
 
     private ZonedDateTime playedAt;
 

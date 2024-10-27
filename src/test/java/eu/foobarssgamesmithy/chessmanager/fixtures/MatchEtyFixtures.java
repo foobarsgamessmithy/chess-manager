@@ -4,13 +4,14 @@ import eu.foobarssgamesmithy.chessmanager.persistence.entity.MatchEntity;
 import eu.foobarssgamesmithy.chessmanager.persistence.entity.ResultEntity;
 import eu.foobarssgamesmithy.chessmanager.service.dto.PlayedPieces;
 
+import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.MATCH_UUID;
 import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.PLAYED_AT;
 
 public class MatchEtyFixtures {
 
     public static MatchEntity aMatch(){
         return MatchEntity.builder()
-                .id(100L)
+                .matchId(MATCH_UUID)
                 .playedAt(PLAYED_AT)
                 .playedWith(PlayedPieces.WHITE)
                 .result(aResult())

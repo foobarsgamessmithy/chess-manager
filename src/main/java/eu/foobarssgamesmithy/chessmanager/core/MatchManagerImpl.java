@@ -9,6 +9,7 @@ import eu.foobarssgamesmithy.chessmanager.persistence.entity.MatchEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class MatchManagerImpl implements MatchManager {
@@ -29,7 +30,7 @@ public class MatchManagerImpl implements MatchManager {
     }
 
     @Override
-    public MatchBo getMatch(Long id) throws MatchException {
+    public MatchBo getMatch(UUID id) throws MatchException {
         Optional<MatchEntity> matchOpt = this.matchRepository.findById(id);
         if(!matchOpt.isPresent()){
             throw MatchExceptionFactory.notFound(id);

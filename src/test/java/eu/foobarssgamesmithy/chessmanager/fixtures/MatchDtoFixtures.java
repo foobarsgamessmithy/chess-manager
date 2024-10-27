@@ -4,14 +4,17 @@ import eu.foobarssgamesmithy.chessmanager.service.dto.MatchDto;
 import eu.foobarssgamesmithy.chessmanager.service.dto.PlayedPieces;
 import eu.foobarssgamesmithy.chessmanager.service.dto.ResultDto;
 
-import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.PLAYED_AT;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+
+import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.*;
 
 public class MatchDtoFixtures {
 
     public static MatchDto aMatch(){
         return MatchDto.builder()
-                .id(100L)
-                .playedAt(PLAYED_AT.toString())
+                .id(MATCH_UUID)
+                .playedAt(formatZonedDateTimeForDto(PLAYED_AT))
                 .playedWith(PlayedPieces.WHITE)
                 .result(aResult())
                 .build();
@@ -21,6 +24,16 @@ public class MatchDtoFixtures {
         return ResultDto.builder()
                 .pointsBlack(0)
                 .pointsWhite(1)
+                .build();
+    }
+
+    public static MatchDto savedMatch1(){
+        return MatchDto.builder()
+                .id(SAVED_MATCH_UUID_1)
+                .playedAt(formatZonedDateTimeForDto(
+                        ZonedDateTime.of(LocalDateTime.of(2024,10,18,12,30, 0),
+                        STANDARD_ZONE)))
+                .playedWith(PlayedPieces.WHITE)
                 .build();
     }
 

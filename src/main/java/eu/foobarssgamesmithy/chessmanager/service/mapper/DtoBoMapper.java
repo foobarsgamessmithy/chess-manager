@@ -3,15 +3,20 @@ package eu.foobarssgamesmithy.chessmanager.service.mapper;
 import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.service.dto.MatchDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Mapper(componentModel = "spring")
 public interface DtoBoMapper {
 
-    @Mapping(target = "playedAt", source = "playedAt")
     MatchDto mapMatch(MatchBo match);
 
-    @Mapping(target = "playedAt", source = "playedAt")
     MatchBo mapMatch(MatchDto match);
+
+    default String map(ZonedDateTime zonedDateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+        return formatter.format(zonedDateTime);
+    }
 
 }
