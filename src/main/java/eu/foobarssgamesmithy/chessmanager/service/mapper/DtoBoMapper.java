@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface DtoBoMapper {
@@ -19,4 +20,5 @@ public interface DtoBoMapper {
         return formatter.format(zonedDateTime);
     }
 
+    List<MatchDto> mapMatches(List<MatchBo> matches);
 }

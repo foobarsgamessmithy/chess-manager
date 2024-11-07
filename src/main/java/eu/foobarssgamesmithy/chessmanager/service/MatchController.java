@@ -43,15 +43,10 @@ public class MatchController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<MatchDto>> getMatches(){
-        try {
-            // TODO fix
-            MatchBo match = this.matchManager.getMatch(UUID.randomUUID());
-            return ResponseEntity.ok().body(List.of(this.mapper.mapMatch(match)));
-        } catch (MatchException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        List<MatchBo> matches = this.matchManager.getMatches();
+        return ResponseEntity.ok().body(this.mapper.mapMatches(matches));
     }
 
 }

@@ -6,6 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring",
 unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface BoEtyMapper {
@@ -17,4 +19,6 @@ public interface BoEtyMapper {
     @Mapping(source = "id", target = "matchId")
     @Mapping(source = "playedAt", target = "playedAt")
     MatchEntity mapMatch(MatchBo match);
+
+    List<MatchBo> mapMatches(List<MatchEntity> list);
 }

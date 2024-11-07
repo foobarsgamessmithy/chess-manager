@@ -1,5 +1,6 @@
 package eu.foobarssgamesmithy.chessmanager;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchDtoFixtures;
 import eu.foobarssgamesmithy.chessmanager.service.dto.MatchDto;
@@ -12,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.*;
@@ -85,6 +87,25 @@ class ChessManagerApplicationTests {
 		assertThat(actual)
 				.usingRecursiveComparison()
 				.isEqualTo(expected);
+	}
+
+	@Test
+	void getMatches_shouldReturnOk() throws Exception {
+		// Arrange
+		List<MatchDto> expected =
+				List.of(MatchDtoFixtures.savedMatch1(),
+						MatchDtoFixtures.savedMatch2()
+				);
+
+		// Act
+		ResultActions result = mockMvc.perform(get("/api/match/all"));
+
+		// Assert
+		result.andExpect(status().isOk());
+		List<MatchDto> actual = new ObjectMapper()
+				.readValue(result.andReturn().getResponse().getContentAsString(),
+						new TypeReference<>() {});
+		assertThat(actual).containsAll(expected);
 	}
 
 }

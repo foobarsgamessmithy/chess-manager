@@ -37,4 +37,14 @@ public class MatchDtoFixtures {
                 .build();
     }
 
+    public static MatchDto savedMatch2(){
+        return MatchDto.builder()
+                .id(SAVED_MATCH_UUID_2)
+                .playedAt(formatZonedDateTimeForDto(
+                        ZonedDateTime.of(LocalDateTime.of(2024,10,19,5,7, 0),
+                        STANDARD_ZONE)))
+                .playedWith(PlayedPieces.BLACK)
+                .build();
+    }
+
 }

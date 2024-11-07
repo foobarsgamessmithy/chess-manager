@@ -6,8 +6,10 @@ import eu.foobarssgamesmithy.chessmanager.core.exception.MatchExceptionFactory;
 import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
 import eu.foobarssgamesmithy.chessmanager.persistence.MatchRepository;
 import eu.foobarssgamesmithy.chessmanager.persistence.entity.MatchEntity;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,5 +38,10 @@ public class MatchManagerImpl implements MatchManager {
             throw MatchExceptionFactory.notFound(id);
         }
         return this.mapper.mapMatch(matchOpt.get());
+    }
+
+    @Override
+    public List<MatchBo> getMatches() {
+        return this.mapper.mapMatches(Streamable.of(this.matchRepository.findAll()).toList());
     }
 }

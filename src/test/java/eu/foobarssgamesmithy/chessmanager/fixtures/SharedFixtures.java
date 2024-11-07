@@ -11,6 +11,8 @@ public class SharedFixtures {
 
     public static UUID SAVED_MATCH_UUID_1 = UUID.fromString("00000000-0000-0000-0001-000000000001");
 
+    public static UUID SAVED_MATCH_UUID_2 = UUID.fromString("00000000-0000-0000-0001-000000000002");
+
     public static UUID MATCH_UUID = UUID.fromString("0e492bb1-d84f-4a78-bc66-78218521d50a");
 
     public static ZoneId STANDARD_ZONE =  ZoneId.of("CET");
