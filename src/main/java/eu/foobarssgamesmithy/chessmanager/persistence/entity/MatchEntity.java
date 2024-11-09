@@ -1,17 +1,21 @@
 package eu.foobarssgamesmithy.chessmanager.persistence.entity;
 
-import eu.foobarssgamesmithy.chessmanager.service.dto.PlayedPieces;
+import eu.foobarssgamesmithy.chessmanager.service.data.PlayedPieces;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Builder
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "MATCH")
-@NoArgsConstructor
-@AllArgsConstructor
 public class MatchEntity {
 
     @Id
@@ -28,35 +32,6 @@ public class MatchEntity {
     @JoinColumn(name = "result_id")
     private ResultEntity result;
 
-    public UUID getMatchId() {
-        return matchId;
-    }
-
-    public void setMatchId(UUID matchId) {
-        this.matchId = matchId;
-    }
-
-    public ZonedDateTime getPlayedAt() {
-        return playedAt;
-    }
-
-    public void setPlayedAt(ZonedDateTime playedAt) {
-        this.playedAt = playedAt;
-    }
-
-    public PlayedPieces getPlayedWith() {
-        return playedWith;
-    }
-
-    public void setPlayedWith(PlayedPieces playedWith) {
-        this.playedWith = playedWith;
-    }
-
-    public ResultEntity getResult() {
-        return result;
-    }
-
-    public void setResult(ResultEntity result) {
-        this.result = result;
+    public MatchEntity() {
     }
 }

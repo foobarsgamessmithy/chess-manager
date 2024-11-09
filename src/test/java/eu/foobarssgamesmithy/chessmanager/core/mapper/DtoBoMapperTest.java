@@ -3,7 +3,7 @@ package eu.foobarssgamesmithy.chessmanager.core.mapper;
 import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchBoFixtures;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchDtoFixtures;
-import eu.foobarssgamesmithy.chessmanager.service.dto.MatchDto;
+import eu.foobarssgamesmithy.chessmanager.service.data.MatchDto;
 import eu.foobarssgamesmithy.chessmanager.service.mapper.DtoBoMapper;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;

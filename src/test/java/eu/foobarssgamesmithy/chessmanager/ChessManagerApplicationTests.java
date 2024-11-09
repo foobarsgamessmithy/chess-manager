@@ -3,7 +3,7 @@ package eu.foobarssgamesmithy.chessmanager;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchDtoFixtures;
-import eu.foobarssgamesmithy.chessmanager.service.dto.MatchDto;
+import eu.foobarssgamesmithy.chessmanager.service.data.MatchDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

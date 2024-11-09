@@ -1,4 +1,4 @@
-package eu.foobarssgamesmithy.chessmanager.service.dto;
+package eu.foobarssgamesmithy.chessmanager.service.data;
 
 import lombok.*;
 

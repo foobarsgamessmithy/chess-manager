@@ -1,7 +1,7 @@
 package eu.foobarssgamesmithy.chessmanager.service.mapper;
 
 import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
-import eu.foobarssgamesmithy.chessmanager.service.dto.MatchDto;
+import eu.foobarssgamesmithy.chessmanager.service.data.MatchDto;
 import org.mapstruct.Mapper;
 
 import java.time.ZonedDateTime;

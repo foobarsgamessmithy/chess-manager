@@ -1,8 +1,8 @@
 package eu.foobarssgamesmithy.chessmanager.fixtures;
 
-import eu.foobarssgamesmithy.chessmanager.service.dto.MatchDto;
-import eu.foobarssgamesmithy.chessmanager.service.dto.PlayedPieces;
-import eu.foobarssgamesmithy.chessmanager.service.dto.ResultDto;
+import eu.foobarssgamesmithy.chessmanager.service.data.MatchDto;
+import eu.foobarssgamesmithy.chessmanager.service.data.PlayedPieces;
+import eu.foobarssgamesmithy.chessmanager.service.data.ResultDto;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
