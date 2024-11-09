@@ -25,12 +25,22 @@ public class MatchController {
     }
 
     @PostMapping
-    public ResponseEntity<MatchDto> createMatch(
-            @RequestBody MatchDto matchDto
-            ){
+    public ResponseEntity<MatchDto> createMatch(@RequestBody MatchDto matchDto){
         MatchBo match = this.mapper.mapMatch(matchDto);
         match = this.matchManager.saveMatch(match);
         return ResponseEntity.ok().body(this.mapper.mapMatch(match));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteMatch(@PathVariable("id") String id){
+        try {
+            if(this.matchManager.getMatch(UUID.fromString(id)) != null){
+                this.matchManager.deleteMatch(UUID.fromString(id));
+            }
+        } catch (MatchException e) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
