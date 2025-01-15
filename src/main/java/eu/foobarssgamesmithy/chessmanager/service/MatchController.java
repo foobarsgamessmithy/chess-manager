@@ -34,9 +34,7 @@ public class MatchController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteMatch(@PathVariable("id") String id){
         try {
-            if(this.matchManager.getMatch(UUID.fromString(id)) != null){
-                this.matchManager.deleteMatch(UUID.fromString(id));
-            }
+            this.matchManager.deleteMatch(UUID.fromString(id));
         } catch (MatchException e) {
             return ResponseEntity.notFound().build();
         }

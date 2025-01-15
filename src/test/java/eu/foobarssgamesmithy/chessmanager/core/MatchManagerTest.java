@@ -89,8 +89,10 @@ class MatchManagerTest {
     }
 
     @Test
-    void deleteMatch_shouldDeleteMatch() {
+    void deleteMatch_shouldDeleteMatch() throws MatchException {
         // Arrange
+        when(this.matchRepository.findById(MATCH_WITHOUT_RESULT_UUID))
+                .thenReturn(Optional.ofNullable(MatchEtyFixtures.aMatchWithoutResult()));
 
         // Act
         this.underTest.deleteMatch(MATCH_WITHOUT_RESULT_UUID);

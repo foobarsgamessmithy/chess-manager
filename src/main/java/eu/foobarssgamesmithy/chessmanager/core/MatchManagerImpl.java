@@ -32,8 +32,10 @@ public class MatchManagerImpl implements MatchManager {
     }
 
     @Override
-    public void deleteMatch(UUID uuid) {
-        this.matchRepository.deleteById(uuid);
+    public void deleteMatch(UUID uuid) throws MatchException {
+        if(this.getMatch(uuid) != null) {
+            this.matchRepository.deleteById(uuid);
+        }
     }
 
     @Override
