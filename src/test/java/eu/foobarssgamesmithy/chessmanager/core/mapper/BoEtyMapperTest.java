@@ -17,7 +17,7 @@ class BoEtyMapperTest {
     void mapMatch_shouldMapMatchEtyFieldsCorrect(){
         // arrange
         MatchBo match = MatchBoFixtures.aMatch();
-        MatchEntity expected = MatchEtyFixtures.aMatch();
+        MatchEntity expected = MatchEtyFixtures.aMatchWithResult();
 
         // act
         MatchEntity actual = this.underTest.mapMatch(match);
@@ -32,7 +32,7 @@ class BoEtyMapperTest {
     void mapMatch_shouldMapMatchBoFieldsCorrect(){
         // arrange
         MatchBo expected = MatchBoFixtures.aMatch();
-        MatchEntity match = MatchEtyFixtures.aMatch();
+        MatchEntity match = MatchEtyFixtures.aMatchWithResult();
 
         // act
         MatchBo actual = this.underTest.mapMatch(match);

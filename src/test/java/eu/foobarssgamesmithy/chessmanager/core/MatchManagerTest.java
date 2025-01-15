@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.MATCH_UUID;
+import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.MATCH_WITHOUT_RESULT_UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
@@ -49,7 +49,7 @@ class MatchManagerTest {
         MatchBo expected = MatchBoFixtures.aMatch();
         UUID id = expected.getId();
 
-        when(this.matchRepository.findById(id)).thenReturn(Optional.ofNullable(MatchEtyFixtures.aMatch()));
+        when(this.matchRepository.findById(id)).thenReturn(Optional.ofNullable(MatchEtyFixtures.aMatchWithResult()));
 
         // Act
         MatchBo actual = this.underTest.getMatch(id);
@@ -77,7 +77,7 @@ class MatchManagerTest {
         // Arrange
         List<MatchBo> expected =  List.of(MatchBoFixtures.aMatch());
 
-        when(this.matchRepository.findAll()).thenReturn(Collections.singleton(MatchEtyFixtures.aMatch()));
+        when(this.matchRepository.findAll()).thenReturn(Collections.singleton(MatchEtyFixtures.aMatchWithResult()));
 
         // Act
         List<MatchBo> actual = this.underTest.getMatches();
@@ -93,12 +93,12 @@ class MatchManagerTest {
         // Arrange
 
         // Act
-        this.underTest.deleteMatch(MATCH_UUID);
+        this.underTest.deleteMatch(MATCH_WITHOUT_RESULT_UUID);
 
         // Assert
         verify(this.matchRepository).deleteById(this.matchIdCaptor.capture());
         assertThat(this.matchIdCaptor.getValue())
-                .isEqualTo(MATCH_UUID);
+                .isEqualTo(MATCH_WITHOUT_RESULT_UUID);
     }
 
 }

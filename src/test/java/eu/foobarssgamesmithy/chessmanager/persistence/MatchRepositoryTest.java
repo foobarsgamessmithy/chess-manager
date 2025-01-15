@@ -9,7 +9,8 @@ import org.springframework.test.context.ActiveProfiles;
 import java.util.Optional;
 import java.util.UUID;
 
-import static eu.foobarssgamesmithy.chessmanager.fixtures.MatchEtyFixtures.aMatch;
+import static eu.foobarssgamesmithy.chessmanager.fixtures.MatchEtyFixtures.aMatchWithResult;
+import static eu.foobarssgamesmithy.chessmanager.fixtures.MatchEtyFixtures.aMatchWithoutResult;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
@@ -22,9 +23,25 @@ class MatchRepositoryTest {
     @Test
     void save_shouldSaveMatchCorrectly() {
         // arrange
-        MatchEntity match = aMatch();
-        match.setMatchId(null);
-        MatchEntity expected = aMatch();
+        MatchEntity match = aMatchWithoutResult(null);
+        MatchEntity expected = aMatchWithoutResult();
+
+        // act
+        MatchEntity actual = this.underTest.save(match);
+
+        // arrange
+        assertThat(actual)
+                .usingRecursiveComparison()
+                .ignoringFieldsOfTypes(UUID.class)
+                .isEqualTo(expected);
+        assertThat(actual.getMatchId()).isNotNull();
+    }
+
+    @Test
+    void save_withResult_shouldSaveMatchCorrectly() {
+        // arrange
+        MatchEntity match = aMatchWithResult(null);
+        MatchEntity expected = aMatchWithResult();
 
         // act
         MatchEntity actual = this.underTest.save(match);
@@ -41,7 +58,7 @@ class MatchRepositoryTest {
     @Test
     void deleteById_shouldDeleteMatchCorrectly() {
         // arrange
-        MatchEntity match = aMatch();
+        MatchEntity match = aMatchWithoutResult();
         match.setMatchId(null);
         MatchEntity savedMatch = this.underTest.save(match);
 

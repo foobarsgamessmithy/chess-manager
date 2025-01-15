@@ -41,7 +41,7 @@ class MatchControllerTest {
         MatchDto expected = MatchDtoFixtures.aMatch();
 
         expected.setPlayedAt(formatZonedDateTimeForDto(playedAt));
-        expected.setId(MATCH_UUID);
+        expected.setId(MATCH_WITHOUT_RESULT_UUID);
 
         // Act
         ResultActions result = mockMvc.perform(post("/api/match")

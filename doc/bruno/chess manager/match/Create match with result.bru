@@ -1,0 +1,26 @@
+meta {
+  name: Create match with result
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}/api/match
+  body: json
+  auth: none
+}
+
+headers {
+  X-XSRF-TOKEN: {{xsrf-token}}
+}
+
+body:json {
+  {
+    "playedAt":"2024-10-18T12:30:00+02",
+    "playedWith":"WHITE",
+    "result": {
+      "pointsWhite": 0,
+      "pointsBlack": 1
+    }
+  }
+}

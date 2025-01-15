@@ -13,7 +13,7 @@ public class MatchDtoFixtures {
 
     public static MatchDto aMatch(){
         return MatchDto.builder()
-                .id(MATCH_UUID)
+                .id(MATCH_WITH_RESULT_UUID)
                 .playedAt(formatZonedDateTimeForDto(PLAYED_AT))
                 .playedWith(PlayedPieces.WHITE)
                 .result(aResult())
