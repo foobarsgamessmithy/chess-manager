@@ -18,8 +18,7 @@ import java.util.UUID;
 
 import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,9 +45,8 @@ class MatchControllerTest {
 
         // Act
         ResultActions result = mockMvc.perform(post("/api/match")
-                .contentType(APPLICATION_JSON_UTF8)
-                .content(new ObjectMapper().writeValueAsString(match))
-                .with(csrf()));
+                .contentType(APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(match)));
 
         // Assert
         result.andExpect(status().isOk());
@@ -113,15 +111,13 @@ class MatchControllerTest {
         // Arrange
         MatchDto match = MatchDtoFixtures.aMatch();
         ResultActions savedMatchResult = mockMvc.perform(post("/api/match")
-                .contentType(APPLICATION_JSON_UTF8)
-                .content(new ObjectMapper().writeValueAsString(match))
-                .with(csrf()));
+                .contentType(APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(match)));
         MatchDto savedMatch = new ObjectMapper()
                 .readValue(savedMatchResult.andReturn().getResponse().getContentAsString(), MatchDto.class);
 
         // Act
-        ResultActions result = mockMvc.perform(delete("/api/match/{id}", savedMatch.getId().toString())
-                .with(csrf()));
+        ResultActions result = mockMvc.perform(delete("/api/match/{id}", savedMatch.getId().toString()));
 
         // Assert
         result.andExpect(status().isOk());

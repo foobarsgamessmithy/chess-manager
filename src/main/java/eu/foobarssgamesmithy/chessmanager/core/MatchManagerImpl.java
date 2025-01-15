@@ -39,7 +39,7 @@ public class MatchManagerImpl implements MatchManager {
     @Override
     public MatchBo getMatch(UUID id) throws MatchException {
         Optional<MatchEntity> matchOpt = this.matchRepository.findById(id);
-        if(!matchOpt.isPresent()){
+        if(matchOpt.isEmpty()){
             throw MatchExceptionFactory.notFound(id);
         }
         return this.mapper.mapMatch(matchOpt.get());

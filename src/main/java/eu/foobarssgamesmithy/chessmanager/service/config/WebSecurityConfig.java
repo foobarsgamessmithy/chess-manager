@@ -19,7 +19,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // For now we disable csrf because only clients will send requests
+                // For now, we disable csrf because only clients will send requests
                 // https://docs.spring.io/spring-security/reference/features/exploits/csrf.html
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests

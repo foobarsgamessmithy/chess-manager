@@ -9,15 +9,15 @@ import java.util.UUID;
 
 public class SharedFixtures {
 
-    public static UUID SAVED_MATCH_UUID_1 = UUID.fromString("00000000-0000-0000-0001-000000000001");
+    public static final UUID SAVED_MATCH_UUID_1 = UUID.fromString("00000000-0000-0000-0001-000000000001");
 
-    public static UUID SAVED_MATCH_UUID_2 = UUID.fromString("00000000-0000-0000-0001-000000000002");
+    public static final UUID SAVED_MATCH_UUID_2 = UUID.fromString("00000000-0000-0000-0001-000000000002");
 
-    public static UUID MATCH_UUID = UUID.fromString("0e492bb1-d84f-4a78-bc66-78218521d50a");
+    public static final UUID MATCH_UUID = UUID.fromString("0e492bb1-d84f-4a78-bc66-78218521d50a");
 
-    public static ZoneId STANDARD_ZONE =  ZoneId.of("CET");
+    public static final ZoneId STANDARD_ZONE =  ZoneId.of("CET");
 
-    public static ZonedDateTime PLAYED_AT = LocalDateTime.of(2024,10,25,13,37, 42)
+    public static final ZonedDateTime PLAYED_AT = LocalDateTime.of(2024,10,25,13,37, 42)
             .atOffset(ZoneOffset.of("+01:00"))
             .toZonedDateTime();
 
