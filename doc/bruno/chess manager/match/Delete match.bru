@@ -1,0 +1,15 @@
+meta {
+  name: Delete match
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{url}}/api/match/{{_matchId}}
+  body: json
+  auth: none
+}
+
+headers {
+  X-XSRF-TOKEN: {{xsrf-token}}
+}
