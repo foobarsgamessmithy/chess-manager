@@ -47,16 +47,30 @@ tasks.named('test') {
 }
 
 class KeycloakTask extends DefaultTask {
+
+	static final keycloakVersion = "keycloak-26.1.0"
+
+	static final mainPath = 'build/'
+
 	@TaskAction
 	void action() {
 		downloadAndUnzip()
+		startKeycloak()
+	}
+
+	void startKeycloak() {
+		def keycloakBin = mainPath + keycloakVersion + '/bin'
+		def sout = new StringBuilder(), serr = new StringBuilder()
+		def proc = '"CMD.EXE", "/c build\\keycloak-26.1.0\\bin\\kc.bat start-dev'.execute()
+		proc.consumeProcessOutput(sout, serr)
+		proc.waitForOrKill(5000)
+		println "out> $sout\nerr> $serr"
 	}
 
 	void downloadAndUnzip() {
-		def keycloakVersion = "keycloak-26.1.0"
-		def versionFile = new File('build/' + keycloakVersion + '/version.txt');
+		def versionFile = new File( mainPath + keycloakVersion + '/version.txt');
 		if(!versionFile.exists()) {
-			def zipFile = new File('build/' + keycloakVersion + '.zip')
+			def zipFile = new File(mainPath + keycloakVersion + '.zip')
 			if (!zipFile.exists()) {
 				new URL('https://github.com/keycloak/keycloak/releases/download/26.1.0/keycloak-26.1.0.zip')
 						.withInputStream { i -> zipFile.withOutputStream { it << i } }
