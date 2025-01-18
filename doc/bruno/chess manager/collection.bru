@@ -1,29 +1,8 @@
 auth {
-  mode: oauth2
-}
-
-auth:oauth2 {
-  grant_type: authorization_code
-  callback_url: http://localhost:8081/login/oauth2/code/keycloak
-  authorization_url: http://localhost:8080/realms/chessmanager/protocol/openid-connect/auth
-  access_token_url: http://localhost:8080/realms/chessmanager/protocol/openid-connect/token
-  client_id: chessmanager-backend
-  client_secret: mXFJHLflaEWNfeYn5nq1rTPi6Jz4VUEK
-  scope: openid
-  state: 
-  pkce: false
+  mode: none
 }
 
 vars:pre-request {
   _matchId: 870ef80d-f8cb-4a22-8f8c-21eba63b94ee
   access_token: 
-}
-
-script:post-response {
-  if(req.getAuthMode() == 'oauth2' && res.body.access_token) {
-      bru.setVar('access_token_set_by_collection_script', res.body.access_token);
-  }
-  console.log("auth")
-  console.log(res)
-  console.log(req)
 }

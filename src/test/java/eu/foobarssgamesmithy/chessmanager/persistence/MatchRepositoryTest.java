@@ -40,6 +40,7 @@ class MatchRepositoryTest {
         assertThat(actual.getMatchId()).isNotNull();
     }
 
+    @Transactional
     @Test
     void save_withResult_shouldSaveMatchCorrectly() {
         // arrange
@@ -53,7 +54,7 @@ class MatchRepositoryTest {
         assertThat(actual)
                 .usingRecursiveComparison()
                 .ignoringFieldsOfTypes(UUID.class)
-                .ignoringFields("result.id")
+                .ignoringFields("result.id", "result.moves.id")
                 .isEqualTo(expected);
         assertThat(actual.getMatchId()).isNotNull();
     }

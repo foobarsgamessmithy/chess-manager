@@ -15,7 +15,8 @@ import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.*;
 public class MatchEtyFixtures {
 
     // "e4 e5", "Bc4 Nc6", "Qh5 Nf6", "Qxf7#"
-    public final static List<MoveEntity> MOVES = List.of(
+    public static List<MoveEntity> aMoveList(){
+        return List.of(
             MoveEntity.builder().field("e4").build(),
             MoveEntity.builder().field("e5").build(),
             MoveEntity.builder().field("c4").figure("B").build(),
@@ -23,7 +24,8 @@ public class MatchEtyFixtures {
             MoveEntity.builder().field("h5").figure("Q").build(),
             MoveEntity.builder().field("f6").figure("N").build(),
             MoveEntity.builder().field("f7").figure("Q").hasCaptured(true).isMade(true).build()
-    );
+        );
+    }
 
     public static MatchEntity aMatchWithoutResult(UUID matchId){
         MatchEntity match = aMatchWithoutResult();
@@ -58,7 +60,7 @@ public class MatchEtyFixtures {
         return ResultEntity.builder()
                 .winner(WinnerTyp.WHITE)
                 .reason(MatchEndReasonTyp.CHECK_MADE)
-                .moves(MOVES)
+                .moves(aMoveList())
                 .build();
     }
 

@@ -27,7 +27,7 @@ public class ResultEntity {
     @Enumerated(EnumType.STRING)
     private MatchEndReasonTyp reason;
 
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="RESULT_ID")
     private List<MoveEntity> moves;
 

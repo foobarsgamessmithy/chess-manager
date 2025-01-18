@@ -24,8 +24,11 @@ import java.util.stream.Stream;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    private static final String[] OPEN_REQUEST_PATH = {
-            "/api/**",
+    private static final String[] PROTECTED_PATH = {
+            "/api/**"
+    };
+
+    private static final String[] OPEN_PATH = {
             "/actuator/**",
             "/h2/**"
     };
@@ -48,8 +51,8 @@ public class WebSecurityConfig {
                     httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable);
                 })
                 .authorizeHttpRequests((requests) -> requests
-                    .requestMatchers(OPEN_REQUEST_PATH)
-                            .authenticated()
+                        .requestMatchers(PROTECTED_PATH).authenticated()
+                        .requestMatchers(OPEN_PATH).permitAll()
                     .anyRequest().denyAll()
                 );
         return http.build();
