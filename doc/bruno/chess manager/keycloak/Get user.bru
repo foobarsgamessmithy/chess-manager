@@ -1,0 +1,15 @@
+meta {
+  name: Get user
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8080/realms/chessmanager/protocol/openid-connect/userinfo
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: bearer {{access_token}}
+}

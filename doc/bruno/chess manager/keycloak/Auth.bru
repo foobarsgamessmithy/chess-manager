@@ -1,0 +1,25 @@
+meta {
+  name: Auth
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/realms/chessmanager/protocol/openid-connect/token
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  grant_type: password
+  username: foobar
+  password: foobar
+  client_id: chessmanager-backend
+  client_secret: mXFJHLflaEWNfeYn5nq1rTPi6Jz4VUEK
+  redirect_uri: http://localhost:8081/login/oauth2/code/keycloak
+}
+
+script:post-response {
+  bru.setVar('access_token', res.body.access_token);
+  
+}
