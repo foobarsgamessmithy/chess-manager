@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.UUID;
 
 public class SharedFixtures {
@@ -27,4 +28,6 @@ public class SharedFixtures {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
         return formatter.format(dateTime);
     }
+
+    public static final List<String> MOVE_LIST = List.of("e4 e5", "Bc4 Bc6", "Qh5 Nf6", "Qxf7#" );
 }

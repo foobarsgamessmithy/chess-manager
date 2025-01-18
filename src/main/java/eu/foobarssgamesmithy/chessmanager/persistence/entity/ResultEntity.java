@@ -1,7 +1,11 @@
 package eu.foobarssgamesmithy.chessmanager.persistence.entity;
 
+import eu.foobarssgamesmithy.chessmanager.service.data.MatchEndReasonTyp;
+import eu.foobarssgamesmithy.chessmanager.service.data.WinnerTyp;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Builder
 @Entity
@@ -16,8 +20,14 @@ public class ResultEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    private double pointsWhite;
+    @Enumerated(EnumType.ORDINAL)
+    private WinnerTyp winner;
 
-    private double pointsBlack;
+    @Enumerated(EnumType.ORDINAL)
+    private MatchEndReasonTyp reason;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="MOVE_ID")
+    private List<MoveEntity> moves;
 
 }

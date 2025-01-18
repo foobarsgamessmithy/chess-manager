@@ -1,8 +1,6 @@
 package eu.foobarssgamesmithy.chessmanager.fixtures;
 
-import eu.foobarssgamesmithy.chessmanager.service.data.MatchDto;
-import eu.foobarssgamesmithy.chessmanager.service.data.PlayedPieces;
-import eu.foobarssgamesmithy.chessmanager.service.data.ResultDto;
+import eu.foobarssgamesmithy.chessmanager.service.data.*;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -22,8 +20,9 @@ public class MatchDtoFixtures {
 
     public static ResultDto aResult(){
         return ResultDto.builder()
-                .pointsBlack(0)
-                .pointsWhite(1)
+                .winner(WinnerTyp.WHITE)
+                .reason(MatchEndReasonTyp.CHECK_MADE)
+                .moves(MOVE_LIST)
                 .build();
     }
 

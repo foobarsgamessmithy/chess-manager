@@ -1,6 +1,10 @@
 package eu.foobarssgamesmithy.chessmanager.core.data;
 
+import eu.foobarssgamesmithy.chessmanager.service.data.MatchEndReasonTyp;
+import eu.foobarssgamesmithy.chessmanager.service.data.WinnerTyp;
 import lombok.*;
+
+import java.util.List;
 
 @Builder
 @Data
@@ -8,8 +12,10 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class ResultBo {
 
-    private double pointsWhite;
+    private WinnerTyp winner;
 
-    private double pointsBlack;
+    private MatchEndReasonTyp reason;
+
+    private List<String> moves;
 
 }

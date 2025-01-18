@@ -2,14 +2,18 @@ package eu.foobarssgamesmithy.chessmanager.service.data;
 
 import lombok.*;
 
+import java.util.List;
+
 @Builder
 @Data
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class ResultDto {
 
-    private double pointsWhite;
+    private WinnerTyp winner;
 
-    private double pointsBlack;
+    private MatchEndReasonTyp reason;
+
+    private List<String> moves;
 
 }
