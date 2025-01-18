@@ -13,7 +13,8 @@ import lombok.*;
 public class MoveEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MOVE_SEQ_GEN")
+    @SequenceGenerator(name = "MOVE_SEQ_GEN", sequenceName = "MOVE_SEQ", allocationSize = 1)
     private Long id;
 
     private String figure;

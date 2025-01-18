@@ -29,15 +29,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
+	// https://mvnrepository.com/artifact/org.liquibase/liquibase-core
+	implementation 'org.liquibase:liquibase-core:4.31.0'
+
 	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct
-//	implementation 'org.mapstruct:mapstruct:1.6.2'
-//	annotationProcessor 'org.projectlombok:lombok:1.18.34', 'org.mapstruct:mapstruct-processor:1.6.2'
 	implementation "org.mapstruct:mapstruct:${mapstructVersion}", "org.projectlombok:lombok:${lombokVersion}"
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}", "org.projectlombok:lombok:${lombokVersion}", "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 
 	runtimeOnly 'com.h2database:h2:2.3.232'
-//	compileOnly 'org.projectlombok:lombok:1.18.34'
-
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'

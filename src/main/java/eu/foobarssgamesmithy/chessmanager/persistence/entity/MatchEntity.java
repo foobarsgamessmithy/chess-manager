@@ -26,6 +26,7 @@ public class MatchEntity {
     private ZonedDateTime playedAt;
 
     @Column(name = "played_with")
+    @Enumerated(EnumType.STRING)
     private PlayedPieces playedWith;
 
     @OneToOne(cascade = CascadeType.ALL)
