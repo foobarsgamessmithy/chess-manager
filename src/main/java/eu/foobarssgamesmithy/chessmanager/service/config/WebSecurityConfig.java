@@ -18,7 +18,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Configuration
 @EnableWebSecurity
@@ -37,19 +36,15 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http,
                                            Converter<Jwt, AbstractAuthenticationToken> authenticationConverter)
             throws Exception {
-        http.oauth2ResourceServer(resourceServer -> {
-            resourceServer.jwt(jwtDecoder -> {
-                jwtDecoder.jwtAuthenticationConverter(authenticationConverter);
-            });
-        });
+        http.oauth2ResourceServer(resourceServer -> resourceServer.jwt(jwtDecoder ->
+                jwtDecoder.jwtAuthenticationConverter(authenticationConverter)));
         http
                 // For now, we disable csrf because only clients will send requests
                 // https://docs.spring.io/spring-security/reference/features/exploits/csrf.html
                 .csrf(AbstractHttpConfigurer::disable)
                 // FIXME: disable for h2 console. should be moved to development profile later
-                .headers(httpSecurityHeadersConfigurer -> {
-                    httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable);
-                })
+                .headers(httpSecurityHeadersConfigurer ->
+                        httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(PROTECTED_PATH).authenticated()
                         .requestMatchers(OPEN_PATH).permitAll()
@@ -74,7 +69,7 @@ public class WebSecurityConfig {
             final var realmAccess = Optional.ofNullable((Map<String, Object>) claims.get("realm_access"));
             final var roles =
                     realmAccess.flatMap(map -> Optional.ofNullable((List<String>) map.get("roles")));
-            return roles.map(List::stream).orElse(Stream.empty()).map(SimpleGrantedAuthority::new)
+            return roles.stream().flatMap(Collection::stream).map(SimpleGrantedAuthority::new)
                     .map(GrantedAuthority.class::cast).toList();
         };
     }

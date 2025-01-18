@@ -1,5 +1,6 @@
 package eu.foobarssgamesmithy.chessmanager.service;
 
+import com.c4_soft.springaddons.security.oauth2.test.annotations.WithMockAuthentication;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchDtoFixtures;
@@ -27,12 +28,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles(profiles = {"test"})
 class MatchControllerTest {
 
-    // TODO mock keycloak for test
-
     @Autowired
     private MockMvc mockMvc;
 
     @Test
+    @WithMockAuthentication
     void createMatch_shouldReturnOk() throws Exception {
         // Arrange
         ZonedDateTime playedAt = ZonedDateTime.now();
@@ -62,6 +62,7 @@ class MatchControllerTest {
     }
 
     @Test
+    @WithMockAuthentication
     void getMatch_shouldReturnNotFound() throws Exception {
         // Arrange
         UUID unknownSavedMatchId = UUID.fromString("00000000-0000-0000-0001-000000000000");
@@ -74,6 +75,7 @@ class MatchControllerTest {
     }
 
     @Test
+    @WithMockAuthentication
     void getMatch_shouldReturnOk() throws Exception {
         // Arrange
         MatchDto expected = MatchDtoFixtures.savedMatch1();
@@ -91,6 +93,7 @@ class MatchControllerTest {
     }
 
     @Test
+    @WithMockAuthentication
     void getMatches_shouldReturnOk() throws Exception {
         // Arrange
         List<MatchDto> expected =
@@ -109,6 +112,7 @@ class MatchControllerTest {
     }
 
     @Test
+    @WithMockAuthentication
     void deleteMatch_shouldReturnOk() throws Exception {
         // Arrange
         MatchDto match = MatchDtoFixtures.aMatch();
