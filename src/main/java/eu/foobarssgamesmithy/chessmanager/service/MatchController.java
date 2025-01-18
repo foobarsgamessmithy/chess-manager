@@ -26,9 +26,15 @@ public class MatchController {
 
     @PostMapping
     public ResponseEntity<MatchDto> createMatch(@RequestBody MatchDto matchDto){
-        MatchBo match = this.mapper.mapMatch(matchDto);
-        match = this.matchManager.saveMatch(match);
-        return ResponseEntity.ok().body(this.mapper.mapMatch(match));
+        try {
+            MatchBo match = this.mapper.mapMatch(matchDto);
+            match = this.matchManager.saveMatch(match);
+            return ResponseEntity.ok().body(this.mapper.mapMatch(match));
+        } catch (Throwable ex) {
+            // TODO add Log
+            System.out.println(ex.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @DeleteMapping("/{id}")

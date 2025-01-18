@@ -8,6 +8,7 @@ import eu.foobarssgamesmithy.chessmanager.persistence.MatchRepository;
 import eu.foobarssgamesmithy.chessmanager.persistence.entity.MatchEntity;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,12 +26,14 @@ public class MatchManagerImpl implements MatchManager {
         this.mapper = mapper;
     }
 
+    @Transactional
     @Override
     public MatchBo saveMatch(MatchBo match) {
         MatchEntity entity = this.matchRepository.save(this.mapper.mapMatch(match));
         return this.mapper.mapMatch(entity);
     }
 
+    @Transactional
     @Override
     public void deleteMatch(UUID uuid) throws MatchException {
         if(this.getMatch(uuid) != null) {
@@ -38,6 +41,7 @@ public class MatchManagerImpl implements MatchManager {
         }
     }
 
+    @Transactional
     @Override
     public MatchBo getMatch(UUID id) throws MatchException {
         Optional<MatchEntity> matchOpt = this.matchRepository.findById(id);
@@ -47,6 +51,7 @@ public class MatchManagerImpl implements MatchManager {
         return this.mapper.mapMatch(matchOpt.get());
     }
 
+    @Transactional
     @Override
     public List<MatchBo> getMatches() {
         return this.mapper.mapMatches(Streamable.of(this.matchRepository.findAll()).toList());

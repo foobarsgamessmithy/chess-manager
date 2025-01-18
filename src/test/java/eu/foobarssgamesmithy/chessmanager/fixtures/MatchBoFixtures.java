@@ -2,7 +2,9 @@ package eu.foobarssgamesmithy.chessmanager.fixtures;
 
 import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.core.data.ResultBo;
+import eu.foobarssgamesmithy.chessmanager.service.data.MatchEndReasonTyp;
 import eu.foobarssgamesmithy.chessmanager.service.data.PlayedPieces;
+import eu.foobarssgamesmithy.chessmanager.service.data.WinnerTyp;
 
 import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.*;
 
@@ -19,8 +21,9 @@ public class MatchBoFixtures {
 
     public static ResultBo aResult(){
         return ResultBo.builder()
-                .pointsBlack(0)
-                .pointsWhite(1)
+                .winner(WinnerTyp.WHITE)
+                .reason(MatchEndReasonTyp.CHECK_MADE)
+                .moves(MOVE_LIST)
                 .build();
     }
 }
