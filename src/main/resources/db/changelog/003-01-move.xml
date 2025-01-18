@@ -13,11 +13,11 @@
             </column>
             <column name="field" type="varchar(2)"/>
             <column name="figure" type="varchar(1)"/>
-            <column name="has_captured" type="boolean"/>
-            <column name="has_promoted" type="boolean"/>
-            <column name="is_check" type="boolean" />
-            <column name="is_en_passant" type="boolean" />
-            <column name="is_made" type="boolean" />
+            <column name="has_captured" type="boolean" defaultValue="0"/>
+            <column name="has_promoted" type="boolean" defaultValue="0"/>
+            <column name="is_check" type="boolean" defaultValue="0"/>
+            <column name="is_en_passant" type="boolean" defaultValue="0"/>
+            <column name="is_made" type="boolean" defaultValue="0"/>
             <column name="result_id" type="bigint" />
         </createTable>
     </changeSet>

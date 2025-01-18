@@ -4,7 +4,6 @@ import eu.foobarssgamesmithy.chessmanager.service.data.*;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.util.List;
 
 import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.*;
 
@@ -52,7 +51,7 @@ public class MatchDtoFixtures {
         return ResultDto.builder()
                 .reason(MatchEndReasonTyp.CHECK_MADE)
                 .winner(WinnerTyp.WHITE)
-                .moves(List.of())
+                .moves(MOVE_LIST)
                 .build();
     }
 
