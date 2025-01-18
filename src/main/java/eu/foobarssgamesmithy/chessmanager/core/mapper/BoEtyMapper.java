@@ -49,6 +49,7 @@ public interface BoEtyMapper {
     List<MatchBo> mapMatches(List<MatchEntity> list);
 
     default MoveEntity map(String source){
+        // TODO add tests and throw invalid exception
         MoveEntity move = MoveEntity.builder().build();
         for(int i = 0; i < source.length(); i++){
             Character ch = source.charAt(i);
@@ -71,6 +72,7 @@ public interface BoEtyMapper {
     }
 
     default String map(MoveEntity source){
+        // TODO add tests
         StringBuilder move = new StringBuilder();
         if(source.getFigure() != null){
             move.append(source.getFigure());

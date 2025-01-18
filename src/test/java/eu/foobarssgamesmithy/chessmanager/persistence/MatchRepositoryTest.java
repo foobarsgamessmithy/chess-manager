@@ -5,9 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.StreamSupport;
 
 import static eu.foobarssgamesmithy.chessmanager.fixtures.MatchEtyFixtures.aMatchWithResult;
 import static eu.foobarssgamesmithy.chessmanager.fixtures.MatchEtyFixtures.aMatchWithoutResult;
@@ -53,6 +56,22 @@ class MatchRepositoryTest {
                 .ignoringFields("result.id")
                 .isEqualTo(expected);
         assertThat(actual.getMatchId()).isNotNull();
+    }
+
+    @Transactional
+    @Test
+    void save_multipleMatchesWithResult_shouldSaveMatchCorrectly() {
+        // arrange
+        MatchEntity firstMatch = aMatchWithResult(null);
+        MatchEntity secondMatch = aMatchWithResult(null);
+        this.underTest.save(firstMatch);
+        this.underTest.save(secondMatch);
+
+        // act
+        List<MatchEntity> actual = StreamSupport.stream(this.underTest.findAll().spliterator(), false).toList();
+
+        // arrange
+        assertThat(actual.size()).isEqualTo(4);
     }
 
     @Test

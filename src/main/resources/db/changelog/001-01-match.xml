@@ -8,7 +8,7 @@
     <changeSet id="0001-create_table_match" author="aboll">
         <createTable schemaName="public" tableName="MATCH">
             <column name="match_id" type="JAVA.UTIL.UUID">
-                <constraints primaryKey="true" nullable="false"/>
+                <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
             <column name="played_at" type="java.sql.Types.TIMESTAMP_WITH_TIMEZONE"/>
             <column name="played_with" type="varchar(5)"/>

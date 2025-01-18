@@ -12,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class ResultBo {
 
+    private Long id;
+
     private WinnerTyp winner;
 
     private MatchEndReasonTyp reason;

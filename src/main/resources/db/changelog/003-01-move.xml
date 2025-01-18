@@ -9,7 +9,7 @@
         <createSequence schemaName="public" startValue="1" incrementBy="1" ordered="true" sequenceName="MOVE_SEQ"/>
         <createTable schemaName="public" tableName="MOVE">
             <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
+                <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
             <column name="field" type="varchar(2)"/>
             <column name="figure" type="varchar(1)"/>

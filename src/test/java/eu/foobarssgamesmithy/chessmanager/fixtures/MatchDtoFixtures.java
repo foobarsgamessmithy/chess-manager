@@ -4,6 +4,7 @@ import eu.foobarssgamesmithy.chessmanager.service.data.*;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.*;
 
@@ -43,6 +44,15 @@ public class MatchDtoFixtures {
                         ZonedDateTime.of(LocalDateTime.of(2024,10,19,5,7, 0),
                         STANDARD_ZONE)))
                 .playedWith(PlayedPieces.BLACK)
+                .result(savedResultForMatch2())
+                .build();
+    }
+
+    public static ResultDto savedResultForMatch2() {
+        return ResultDto.builder()
+                .reason(MatchEndReasonTyp.CHECK_MADE)
+                .winner(WinnerTyp.WHITE)
+                .moves(List.of())
                 .build();
     }
 
