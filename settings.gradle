@@ -1,1 +1,6 @@
 rootProject.name = 'chessmanager'
+include 'infrastructure:keycloak'
+findProject(':infrastructure:keycloak')?.name = 'keycloak'
+include 'infrastructure:keycloak'
+findProject(':infrastructure:keycloak')?.name = 'keycloak'
+
