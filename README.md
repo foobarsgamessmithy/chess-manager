@@ -4,7 +4,7 @@ A small spring boot application which can manage chess games for demonstration p
 
 ## Usage
 
-A collection of request to interact with the application is in the [docs](./doc/bruno/chess%20manager). Use [Bruno](https://www.usebruno.com/downloads) client to send requests.
+A collection of request to interact with the application is in the [docs](./doc/bruno/chess%20manager). Use [Bruno](https://www.usebruno.com/downloads) client to send requests. When application runs with authentication, use the auth request first. All other request will use the auth token form the auth request.
 
 ## Development
 
@@ -16,9 +16,11 @@ A collection of request to interact with the application is in the [docs](./doc/
 
 ### Keycloak 
 
+For now [local](https://www.keycloak.org/downloads) keycloak installation is used. Using docker image is also possible. 
+
 Keycloak is used with oauth2 like in is this [example](https://www.baeldung.com/spring-boot-keycloak).
 
-Realm configuration must be imported via [realm.json](./infrastucture/keycloak/realm-export.json). Test user are also included.
+Realm configuration must be imported via [realm.json](./infrastucture/keycloak/realm-export.json). Test users are also included.
 
 ###
 Roles are not used in application now.
@@ -31,12 +33,12 @@ Roles are not used in application now.
 
 #### Test user
 
+This test user are predefined.
+
 | User name | password | role    |
 |-----------|----------|---------|
 | foobar    | foobar         | manager |
 | drdrunkenstein    | drdrunkenstein         | user    |
-
-
 
 
 ### DB Access
