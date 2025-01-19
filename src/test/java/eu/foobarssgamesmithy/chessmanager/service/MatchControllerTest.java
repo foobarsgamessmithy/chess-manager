@@ -3,6 +3,7 @@ package eu.foobarssgamesmithy.chessmanager.service;
 import com.c4_soft.springaddons.security.oauth2.test.annotations.WithMockAuthentication;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eu.foobarssgamesmithy.chessmanager.common.SpringProfiles;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchDtoFixtures;
 import eu.foobarssgamesmithy.chessmanager.service.data.MatchDto;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles(profiles = {"test"})
+@ActiveProfiles(profiles = {SpringProfiles.TEST, SpringProfiles.DEVELOPMENT})
 class MatchControllerTest {
 
     @Autowired

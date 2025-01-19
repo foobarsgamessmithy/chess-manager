@@ -11,7 +11,7 @@ A collection of request to interact with the application is in the [docs](./doc/
 ### Available Profiles
 
 - test: profile used for unit test execution
-- dev: Enabale authentication but also h2 console is available
+- dev: Enable authentication but also h2 console is available
 - insecure: Disables authentication
 
 ### Keycloak 
