@@ -24,6 +24,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.MATCH_WITHOUT_RESULT_UUID;
+import static eu.foobarssgamesmithy.chessmanager.fixtures.UserBoFixtures.aUser;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
@@ -56,6 +57,7 @@ class MatchManagerTest {
         UUID id = expected.getId();
 
         when(this.matchRepositoryMock.findById(id)).thenReturn(Optional.ofNullable(MatchEtyFixtures.aMatchWithResult()));
+        when(this.userFacadeMock.getUser()).thenReturn(aUser());
 
         // Act
         MatchBo actual = this.underTest.getMatch(id);
@@ -84,6 +86,7 @@ class MatchManagerTest {
         List<MatchBo> expected =  List.of(MatchBoFixtures.aMatch());
 
         when(this.matchRepositoryMock.findAll()).thenReturn(Collections.singleton(MatchEtyFixtures.aMatchWithResult()));
+        when(this.userFacadeMock.getUser()).thenReturn(aUser());
 
         // Act
         List<MatchBo> actual = this.underTest.getMatches();
@@ -99,6 +102,7 @@ class MatchManagerTest {
         // Arrange
         when(this.matchRepositoryMock.findById(MATCH_WITHOUT_RESULT_UUID))
                 .thenReturn(Optional.ofNullable(MatchEtyFixtures.aMatchWithoutResult()));
+        when(this.userFacadeMock.getUser()).thenReturn(aUser());
 
         // Act
         this.underTest.deleteMatch(MATCH_WITHOUT_RESULT_UUID);

@@ -56,12 +56,19 @@ public class MatchManagerImpl implements MatchManager {
         if(matchOpt.isEmpty()){
             throw MatchExceptionFactory.notFound(id);
         }
-        return this.mapper.mapMatch(matchOpt.get());
+        MatchBo match = this.mapper.mapMatch(matchOpt.get());
+        UserBo user = this.userFacade.getUser();
+        if(!user.equals(match.getUser())) {
+            throw MatchExceptionFactory.notOwner(id, user);
+        }
+        return match;
     }
 
     @Transactional
     @Override
     public List<MatchBo> getMatches() {
-        return this.mapper.mapMatches(Streamable.of(this.matchRepository.findAll()).toList());
+        List<MatchBo> matches = this.mapper.mapMatches(Streamable.of(this.matchRepository.findAll()).toList());
+        UserBo user = this.userFacade.getUser();
+        return matches.stream().filter(m -> m.getUser().equals(user)).toList();
     }
 }

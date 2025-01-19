@@ -76,7 +76,7 @@ class MatchControllerTest {
     }
 
     @Test
-    @WithMockAuthentication
+    @WithMockAuthentication(name = "foobar")
     void getMatch_shouldReturnOk() throws Exception {
         // Arrange
         MatchDto expected = MatchDtoFixtures.savedMatch1();
@@ -94,7 +94,7 @@ class MatchControllerTest {
     }
 
     @Test
-    @WithMockAuthentication
+    @WithMockAuthentication(name = "foobar")
     void getMatches_shouldReturnOk() throws Exception {
         // Arrange
         List<MatchDto> expected =

@@ -13,16 +13,10 @@
             <column name="played_at" type="java.sql.Types.TIMESTAMP_WITH_TIMEZONE"/>
             <column name="played_with" type="varchar(5)"/>
             <column name="result_id" type="bigint" />
-        </createTable>
-    </changeSet>
-
-    <changeSet id="0002-table_match_add_userId" author="aboll">
-        <addColumn tableName="MATCH"
-                   schemaName="public">
             <column name="user_id" type="bigint">
                 <constraints nullable="false" />
             </column>
-        </addColumn>
+        </createTable>
     </changeSet>
 
 </databaseChangeLog>

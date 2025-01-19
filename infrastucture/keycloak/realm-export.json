@@ -2505,5 +2505,41 @@
   },
   "clientPolicies": {
     "policies": []
-  }
+  },
+  "users": [
+    {
+      "username": "foobar",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Alexander",
+      "lastName": "Boll",
+      "email": "foobarsgamessmithy@gmail.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "foobar"
+        }
+      ],
+      "realmRoles": [
+        "manager"
+      ]
+    },
+    {
+      "username": "drdrunkenstein",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Magnus",
+      "lastName": "C",
+      "email": "magnus@chess24.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "drdrunkenstein"
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    }
+  ]
 }

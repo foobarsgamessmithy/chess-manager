@@ -30,7 +30,6 @@ class UserTest {
     @Mock
     private UserRepository repositoryMock;
 
-
     @BeforeEach
     void beforeEach(){
         this.underTest = new UserImpl(this.authenticationFacadeMock, this.repositoryMock,

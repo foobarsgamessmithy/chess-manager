@@ -39,6 +39,7 @@ public class MatchEtyFixtures {
                 .matchId(MATCH_WITHOUT_RESULT_UUID)
                 .playedAt(PLAYED_AT)
                 .playedWith(PlayedPieces.WHITE)
+                .user(aUser())
                 .build();
     }
 
