@@ -55,7 +55,7 @@ public interface BoEtyMapper {
     List<MatchBo> mapMatches(List<MatchEntity> list);
 
     default MoveEntity map(String source){
-        // TODO add tests and throw invalid exception
+        // TODO throw invalid exception
         MoveEntity move = MoveEntity.builder().build();
         if(source.equals(Notion.SHORT_CASTLE)) {
             move.setCastle(Castle.SHORT);
@@ -116,7 +116,6 @@ public interface BoEtyMapper {
     }
 
     default String map(MoveEntity source){
-        // TODO add tests
         StringBuilder move = new StringBuilder();
         if(source.getPawn() != null){
             move.append(source.getPawn());
