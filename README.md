@@ -8,4 +8,18 @@ A collection of request to interact with the application is in the [docs](./doc/
 
 ## Development
 
-When application is running with h2 db the database is accessible via [browser](http://localhost:8080/h2). Credentials can be taken from `spring.datasource` in the [application.properties](./src/main/resources/application.properties)
+### Available Profiles
+
+- test: profile used for unit test execution
+- dev: Enabale authentication but also h2 console is available
+- insecure: Disables authentication
+
+### Keycloak 
+
+TODO
+
+Realm configuration must be imported via [realm.json](./infrastucture/keycloak/realm-export.json)
+
+### DB Access
+
+When application is running with h2 db the database is accessible via [browser](http://localhost:8081/h2). Credentials can be taken from `spring.datasource` in the [application.properties](./src/main/resources/application.properties)

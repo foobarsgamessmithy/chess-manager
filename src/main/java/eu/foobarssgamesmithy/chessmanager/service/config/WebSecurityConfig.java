@@ -1,7 +1,9 @@
 package eu.foobarssgamesmithy.chessmanager.service.config;
 
+import eu.foobarssgamesmithy.chessmanager.common.SpringProfiles;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,6 +35,7 @@ public class WebSecurityConfig {
     };
 
     @Bean
+    @Profile(SpringProfiles.DEVELOPMENT)
     public SecurityFilterChain filterChain(HttpSecurity http,
                                            Converter<Jwt, AbstractAuthenticationToken> authenticationConverter)
             throws Exception {
@@ -49,6 +52,21 @@ public class WebSecurityConfig {
                         .requestMatchers(PROTECTED_PATH).authenticated()
                         .requestMatchers(OPEN_PATH).permitAll()
                     .anyRequest().denyAll()
+                );
+        return http.build();
+    }
+
+    @Bean
+    @Profile(SpringProfiles.INSECURE)
+    public SecurityFilterChain insecureFilterChain(HttpSecurity http,
+                                           Converter<Jwt, AbstractAuthenticationToken> authenticationConverter)
+            throws Exception {
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .headers(httpSecurityHeadersConfigurer ->
+                        httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+                .authorizeHttpRequests((requests) -> requests
+                    .anyRequest().permitAll()
                 );
         return http.build();
     }
