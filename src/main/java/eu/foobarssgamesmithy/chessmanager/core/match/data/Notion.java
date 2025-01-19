@@ -1,4 +1,4 @@
-package eu.foobarssgamesmithy.chessmanager.core.data;
+package eu.foobarssgamesmithy.chessmanager.core.match.data;
 
 public class Notion {
 

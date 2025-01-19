@@ -1,4 +1,4 @@
-package eu.foobarssgamesmithy.chessmanager.core.data;
+package eu.foobarssgamesmithy.chessmanager.core.match.data;
 
 import eu.foobarssgamesmithy.chessmanager.service.data.MatchEndReasonTyp;
 import eu.foobarssgamesmithy.chessmanager.service.data.WinnerTyp;

@@ -1,5 +1,6 @@
-package eu.foobarssgamesmithy.chessmanager.persistence.entity;
+package eu.foobarssgamesmithy.chessmanager.persistence.match.entity;
 
+import eu.foobarssgamesmithy.chessmanager.persistence.user.entity.UserEntity;
 import eu.foobarssgamesmithy.chessmanager.service.data.PlayedPieces;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,10 @@ public class MatchEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "result_id")
     private ResultEntity result;
+
+    @OneToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     public MatchEntity() {
     }

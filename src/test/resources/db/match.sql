@@ -1,3 +1,6 @@
+INSERT INTO PLAYER (id, user_name)
+VALUES (10000, 'foobar');
+
 INSERT INTO RESULT (id, winner, reason)
 VALUES (10000, 'WHITE', 'CHECK_MADE');
 
@@ -10,8 +13,8 @@ VALUES (10000, 'e4', null, 0, 0, 10000),
 (10005, 'f6', 'N', 0, 0, 10000),
 (10006, 'f7', 'Q', 1, 1, 10000);
 
-INSERT INTO MATCH (match_id, played_at, played_with)
-VALUES ('00000000-0000-0000-0001-000000000001', '2024-10-18T12:30:00+02', 'WHITE');
+INSERT INTO MATCH (match_id, played_at, played_with, user_id)
+VALUES ('00000000-0000-0000-0001-000000000001', '2024-10-18T12:30:00+02', 'WHITE', 10000);
 
-INSERT INTO MATCH (match_id, played_at, played_with, result_id)
-VALUES ('00000000-0000-0000-0001-000000000002', '2024-10-19T05:07:00+02', 'BLACK', 10000);
+INSERT INTO MATCH (match_id, played_at, played_with, result_id, user_id)
+VALUES ('00000000-0000-0000-0001-000000000002', '2024-10-19T05:07:00+02', 'BLACK', 10000, 10000);

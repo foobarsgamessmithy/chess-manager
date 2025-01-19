@@ -1,6 +1,7 @@
 package eu.foobarssgamesmithy.chessmanager.persistence;
 
-import eu.foobarssgamesmithy.chessmanager.persistence.entity.MatchEntity;
+import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MatchEntity;
+import eu.foobarssgamesmithy.chessmanager.persistence.match.MatchRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

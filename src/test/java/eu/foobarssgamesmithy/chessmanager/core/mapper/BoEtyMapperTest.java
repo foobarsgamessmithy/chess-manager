@@ -1,9 +1,9 @@
 package eu.foobarssgamesmithy.chessmanager.core.mapper;
 
-import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
+import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchBoFixtures;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchEtyFixtures;
-import eu.foobarssgamesmithy.chessmanager.persistence.entity.MatchEntity;
+import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MatchEntity;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 

@@ -8,4 +8,5 @@
     <include file="db/changelog/001-01-match.xml"/>
     <include file="db/changelog/002-01-result.xml"/>
     <include file="db/changelog/003-01-move.xml"/>
+    <include file="db/changelog/004-01-user.xml"/>
 </databaseChangeLog>

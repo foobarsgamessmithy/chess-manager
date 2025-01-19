@@ -1,7 +1,7 @@
-package eu.foobarssgamesmithy.chessmanager.core;
+package eu.foobarssgamesmithy.chessmanager.core.match;
 
-import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
-import eu.foobarssgamesmithy.chessmanager.core.exception.MatchException;
+import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
+import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchException;
 
 import java.util.List;
 import java.util.UUID;

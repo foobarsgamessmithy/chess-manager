@@ -1,4 +1,4 @@
-package eu.foobarssgamesmithy.chessmanager.core.exception;
+package eu.foobarssgamesmithy.chessmanager.core.match.exception;
 
 public class MatchNotFoundException extends MatchException {
 

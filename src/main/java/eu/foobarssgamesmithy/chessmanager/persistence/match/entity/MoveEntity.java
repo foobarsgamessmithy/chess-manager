@@ -1,4 +1,4 @@
-package eu.foobarssgamesmithy.chessmanager.persistence.entity;
+package eu.foobarssgamesmithy.chessmanager.persistence.match.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

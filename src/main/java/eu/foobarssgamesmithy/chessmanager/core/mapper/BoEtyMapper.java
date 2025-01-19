@@ -1,9 +1,11 @@
 package eu.foobarssgamesmithy.chessmanager.core.mapper;
 
-import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
-import eu.foobarssgamesmithy.chessmanager.core.data.Notion;
-import eu.foobarssgamesmithy.chessmanager.persistence.entity.MatchEntity;
-import eu.foobarssgamesmithy.chessmanager.persistence.entity.MoveEntity;
+import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
+import eu.foobarssgamesmithy.chessmanager.core.match.data.Notion;
+import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
+import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MatchEntity;
+import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MoveEntity;
+import eu.foobarssgamesmithy.chessmanager.persistence.user.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -18,11 +20,13 @@ public interface BoEtyMapper {
 
     @Mapping(source = "matchId", target = "id")
     @Mapping(source = "playedAt", target = "playedAt")
-    MatchBo mapMatch(MatchEntity match);
+    @Mapping(source = "user", target = "user")
+    MatchBo mapMatch(MatchEntity source);
 
     @Mapping(source = "id", target = "matchId")
     @Mapping(source = "playedAt", target = "playedAt")
-    MatchEntity mapMatch(MatchBo match);
+    @Mapping(source = "user", target = "user")
+    MatchEntity mapMatch(MatchBo source);
 
     default List<MoveEntity> mapToMoveEntityList(List<String> moves) {
         List<MoveEntity> list = new ArrayList<>();
@@ -86,4 +90,8 @@ public interface BoEtyMapper {
         }
         return move.toString();
     }
+
+    UserBo mapUser(UserEntity source);
+
+    UserEntity mapUser(UserBo source);
 }

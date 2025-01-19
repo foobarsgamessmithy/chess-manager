@@ -1,8 +1,8 @@
 package eu.foobarssgamesmithy.chessmanager.fixtures;
 
-import eu.foobarssgamesmithy.chessmanager.persistence.entity.MatchEntity;
-import eu.foobarssgamesmithy.chessmanager.persistence.entity.MoveEntity;
-import eu.foobarssgamesmithy.chessmanager.persistence.entity.ResultEntity;
+import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MatchEntity;
+import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MoveEntity;
+import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.ResultEntity;
 import eu.foobarssgamesmithy.chessmanager.service.data.MatchEndReasonTyp;
 import eu.foobarssgamesmithy.chessmanager.service.data.PlayedPieces;
 import eu.foobarssgamesmithy.chessmanager.service.data.WinnerTyp;
@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.*;
+import static eu.foobarssgamesmithy.chessmanager.fixtures.UserEtyFixtures.aUser;
 
 public class MatchEtyFixtures {
 
@@ -53,6 +54,7 @@ public class MatchEtyFixtures {
                 .playedAt(PLAYED_AT)
                 .playedWith(PlayedPieces.WHITE)
                 .result(aResult())
+                .user(aUser())
                 .build();
     }
 

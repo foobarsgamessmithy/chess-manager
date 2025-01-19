@@ -1,8 +1,10 @@
 package eu.foobarssgamesmithy.chessmanager.service;
 
-import eu.foobarssgamesmithy.chessmanager.core.MatchManager;
-import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
-import eu.foobarssgamesmithy.chessmanager.core.exception.MatchException;
+import eu.foobarssgamesmithy.chessmanager.core.match.MatchManager;
+import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
+import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchException;
+import eu.foobarssgamesmithy.chessmanager.core.user.User;
+import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
 import eu.foobarssgamesmithy.chessmanager.service.data.MatchDto;
 import eu.foobarssgamesmithy.chessmanager.service.mapper.DtoBoMapper;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +20,21 @@ public class MatchController {
     private final MatchManager matchManager;
 
     private final DtoBoMapper mapper;
+    
+    private final User userFacade;
 
-    public MatchController(MatchManager matchManager, DtoBoMapper mapper) {
+    public MatchController(MatchManager matchManager, DtoBoMapper mapper, User userFacade) {
         this.matchManager = matchManager;
         this.mapper = mapper;
+        this.userFacade = userFacade;
     }
 
     @PostMapping
     public ResponseEntity<MatchDto> createMatch(@RequestBody MatchDto matchDto){
         try {
+            UserBo user = this.userFacade.getUser();
             MatchBo match = this.mapper.mapMatch(matchDto);
+            match.setUser(user);
             match = this.matchManager.saveMatch(match);
             return ResponseEntity.ok().body(this.mapper.mapMatch(match));
         } catch (Throwable ex) {

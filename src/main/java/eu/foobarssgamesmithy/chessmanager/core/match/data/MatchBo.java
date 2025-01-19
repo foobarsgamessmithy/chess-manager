@@ -1,5 +1,6 @@
-package eu.foobarssgamesmithy.chessmanager.core.data;
+package eu.foobarssgamesmithy.chessmanager.core.match.data;
 
+import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
 import eu.foobarssgamesmithy.chessmanager.service.data.PlayedPieces;
 import lombok.*;
 
@@ -19,5 +20,7 @@ public class MatchBo {
     private PlayedPieces playedWith;
 
     private ResultBo result;
+
+    private UserBo user;
 
 }

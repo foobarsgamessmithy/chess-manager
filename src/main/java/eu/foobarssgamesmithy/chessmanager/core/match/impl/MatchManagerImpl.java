@@ -1,11 +1,12 @@
-package eu.foobarssgamesmithy.chessmanager.core;
+package eu.foobarssgamesmithy.chessmanager.core.match.impl;
 
-import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
-import eu.foobarssgamesmithy.chessmanager.core.exception.MatchException;
-import eu.foobarssgamesmithy.chessmanager.core.exception.MatchExceptionFactory;
+import eu.foobarssgamesmithy.chessmanager.core.match.MatchManager;
+import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
+import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchException;
+import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchExceptionFactory;
 import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
-import eu.foobarssgamesmithy.chessmanager.persistence.MatchRepository;
-import eu.foobarssgamesmithy.chessmanager.persistence.entity.MatchEntity;
+import eu.foobarssgamesmithy.chessmanager.persistence.match.MatchRepository;
+import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MatchEntity;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

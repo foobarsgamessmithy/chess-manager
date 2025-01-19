@@ -1,4 +1,4 @@
-package eu.foobarssgamesmithy.chessmanager.persistence.entity;
+package eu.foobarssgamesmithy.chessmanager.persistence.match.entity;
 
 import eu.foobarssgamesmithy.chessmanager.service.data.MatchEndReasonTyp;
 import eu.foobarssgamesmithy.chessmanager.service.data.WinnerTyp;

@@ -16,4 +16,13 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="0002-table_match_add_userId" author="aboll">
+        <addColumn tableName="MATCH"
+                   schemaName="public">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

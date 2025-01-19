@@ -1,12 +1,14 @@
 package eu.foobarssgamesmithy.chessmanager.core;
 
-import eu.foobarssgamesmithy.chessmanager.core.data.MatchBo;
-import eu.foobarssgamesmithy.chessmanager.core.exception.MatchException;
-import eu.foobarssgamesmithy.chessmanager.core.exception.MatchNotFoundException;
+import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
+import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchException;
+import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchNotFoundException;
 import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
+import eu.foobarssgamesmithy.chessmanager.core.match.MatchManager;
+import eu.foobarssgamesmithy.chessmanager.core.match.impl.MatchManagerImpl;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchBoFixtures;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchEtyFixtures;
-import eu.foobarssgamesmithy.chessmanager.persistence.MatchRepository;
+import eu.foobarssgamesmithy.chessmanager.persistence.match.MatchRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
