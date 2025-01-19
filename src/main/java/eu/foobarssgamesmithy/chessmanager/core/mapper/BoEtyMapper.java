@@ -1,7 +1,9 @@
 package eu.foobarssgamesmithy.chessmanager.core.mapper;
 
+import eu.foobarssgamesmithy.chessmanager.core.match.data.Castle;
 import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.core.match.data.Notion;
+import eu.foobarssgamesmithy.chessmanager.core.match.data.Promotion;
 import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
 import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MatchEntity;
 import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MoveEntity;
@@ -55,21 +57,59 @@ public interface BoEtyMapper {
     default MoveEntity map(String source){
         // TODO add tests and throw invalid exception
         MoveEntity move = MoveEntity.builder().build();
-        for(int i = 0; i < source.length(); i++){
-            Character ch = source.charAt(i);
-            if(Character.isUpperCase(ch)){
-                move.setFigure(String.valueOf(ch));
-            } else if(Notion.MADE.equals(String.valueOf(ch))){
-                move.setMade(true);
-            }else if(Notion.CAPTURE.equals(String.valueOf(ch))) {
-                move.setHasCaptured(true);
-            } else {
-                StringBuilder field = new StringBuilder(String.valueOf(ch));
-                if(source.length() > i+1){
-                    field.append(source.charAt(i + 1));
-                    i++;
+        if(source.equals(Notion.SHORT_CASTLE)) {
+            move.setCastle(Castle.SHORT);
+        } else if (source.equals(Notion.LONG_CASTLE)) {
+            move.setCastle(Castle.LONG);
+        } else {
+            for (int i = 0; i < source.length(); i++) {
+                String ch = String.valueOf(source.charAt(i));
+                if (Notion.PIECES.contains(ch)) {
+                    if(i != 0){
+                        move.setPromotion(Promotion.fromNotation(ch));
+                    } else {
+                        if (source.length() > i + 2
+                                && Notion.FILES.contains(String.valueOf(source.charAt(i+1)))
+                                && Notion.CAPTURE.equals(String.valueOf(source.charAt(i+2)))
+                        ) {
+                            move.setFile(String.valueOf(source.charAt(i+1)));
+                            move.setHasCaptured(true);
+                            move.setFigure(ch);
+                            i+=2;
+                        } else if (source.length() > i + 1
+                                && Notion.RANKS.contains(String.valueOf(source.charAt(i+1)))) {
+                            move.setRank(String.valueOf(source.charAt(i+1)));
+                            move.setFigure(ch);
+                            i++;
+                        } else {
+                            move.setFigure(ch);
+                        }
+                    }
+                } else if (Notion.MADE.equals(ch)) {
+                    move.setMade(true);
+                } else if (Notion.CAPTURE.equals(ch)) {
+                    move.setHasCaptured(true);
+                } else if (Notion.CHECK.equals(ch)) {
+                    move.setCheck(true);
+                } else if(Notion.FILES.contains(ch)){
+                    // can be part of destination field or is moved pawn
+                    if (source.length() > i + 1) {
+                        String nextChar = String.valueOf(source.charAt(i + 1));
+                        if(Notion.CAPTURE.equals(nextChar)) {
+                            move.setHasCaptured(true);
+                            move.setPawn(ch);
+                        } else if (nextChar.equals(".")){
+                            move.setEnPassant(true);
+                            i+=2;
+                        } else if(Notion.RANKS.contains(nextChar)){
+                            move.setField(ch + nextChar);
+                        } else {
+                            move.setFile(ch);
+                            i--;
+                        }
+                        i++;
+                    }
                 }
-                move.setField(field.toString());
             }
         }
         return move;
@@ -78,15 +118,43 @@ public interface BoEtyMapper {
     default String map(MoveEntity source){
         // TODO add tests
         StringBuilder move = new StringBuilder();
+        if(source.getPawn() != null){
+            move.append(source.getPawn());
+        }
         if(source.getFigure() != null){
             move.append(source.getFigure());
+        }
+        if(source.getFile() != null){
+            move.append(source.getFile());
+        }
+        if(source.getRank() != null){
+            move.append(source.getRank());
         }
         if(source.isHasCaptured()){
             move.append(Notion.CAPTURE);
         }
-        move.append(source.getField());
+        if(source.getField() != null) {
+            move.append(source.getField());
+        }
         if(source.isMade()){
             move.append(Notion.MADE);
+        }
+        if(source.isEnPassant()) {
+            move.append(" " + Notion.EN_PASSANT);
+        }
+        if(source.getPromotion() != null){
+            move.append(source.getPromotion().getShortName());
+        }
+        if(source.isCheck()){
+            move.append(Notion.CHECK);
+        }
+        if(source.getCastle() != null) {
+            Castle castle = source.getCastle();
+            if(castle.equals(Castle.SHORT)) {
+                move.append(Notion.SHORT_CASTLE);
+            } else {
+                move.append(Notion.LONG_CASTLE);
+            }
         }
         return move.toString();
     }
