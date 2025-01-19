@@ -1,11 +1,11 @@
-package eu.foobarssgamesmithy.chessmanager.core;
+package eu.foobarssgamesmithy.chessmanager.core.match;
 
+import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
 import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchException;
 import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchNotFoundException;
-import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
-import eu.foobarssgamesmithy.chessmanager.core.match.MatchManager;
 import eu.foobarssgamesmithy.chessmanager.core.match.impl.MatchManagerImpl;
+import eu.foobarssgamesmithy.chessmanager.core.user.User;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchBoFixtures;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchEtyFixtures;
 import eu.foobarssgamesmithy.chessmanager.persistence.match.MatchRepository;
@@ -35,14 +35,18 @@ class MatchManagerTest {
     private MatchManager underTest;
 
     @Mock
-    private MatchRepository matchRepository;
+    private MatchRepository matchRepositoryMock;
+
+    @Mock
+    private User userFacadeMock;
 
     @Captor
     private ArgumentCaptor<UUID> matchIdCaptor;
 
     @BeforeEach
     void beforeEach(){
-        this.underTest = new MatchManagerImpl(this.matchRepository, Mappers.getMapper(BoEtyMapper.class));
+        this.underTest = new MatchManagerImpl(this.matchRepositoryMock, Mappers.getMapper(BoEtyMapper.class),
+                this.userFacadeMock);
     }
 
     @Test
@@ -51,7 +55,7 @@ class MatchManagerTest {
         MatchBo expected = MatchBoFixtures.aMatch();
         UUID id = expected.getId();
 
-        when(this.matchRepository.findById(id)).thenReturn(Optional.ofNullable(MatchEtyFixtures.aMatchWithResult()));
+        when(this.matchRepositoryMock.findById(id)).thenReturn(Optional.ofNullable(MatchEtyFixtures.aMatchWithResult()));
 
         // Act
         MatchBo actual = this.underTest.getMatch(id);
@@ -68,7 +72,7 @@ class MatchManagerTest {
         MatchBo expected = MatchBoFixtures.aMatch();
         UUID id = expected.getId();
 
-        when(this.matchRepository.findById(id)).thenReturn(Optional.empty());
+        when(this.matchRepositoryMock.findById(id)).thenReturn(Optional.empty());
 
         // Act + Assert
         assertThrows(MatchNotFoundException.class, () -> this.underTest.getMatch(id));
@@ -79,7 +83,7 @@ class MatchManagerTest {
         // Arrange
         List<MatchBo> expected =  List.of(MatchBoFixtures.aMatch());
 
-        when(this.matchRepository.findAll()).thenReturn(Collections.singleton(MatchEtyFixtures.aMatchWithResult()));
+        when(this.matchRepositoryMock.findAll()).thenReturn(Collections.singleton(MatchEtyFixtures.aMatchWithResult()));
 
         // Act
         List<MatchBo> actual = this.underTest.getMatches();
@@ -93,14 +97,14 @@ class MatchManagerTest {
     @Test
     void deleteMatch_shouldDeleteMatch() throws MatchException {
         // Arrange
-        when(this.matchRepository.findById(MATCH_WITHOUT_RESULT_UUID))
+        when(this.matchRepositoryMock.findById(MATCH_WITHOUT_RESULT_UUID))
                 .thenReturn(Optional.ofNullable(MatchEtyFixtures.aMatchWithoutResult()));
 
         // Act
         this.underTest.deleteMatch(MATCH_WITHOUT_RESULT_UUID);
 
         // Assert
-        verify(this.matchRepository).deleteById(this.matchIdCaptor.capture());
+        verify(this.matchRepositoryMock).deleteById(this.matchIdCaptor.capture());
         assertThat(this.matchIdCaptor.getValue())
                 .isEqualTo(MATCH_WITHOUT_RESULT_UUID);
     }

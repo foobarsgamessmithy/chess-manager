@@ -5,6 +5,8 @@ import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchException;
 import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchExceptionFactory;
 import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
+import eu.foobarssgamesmithy.chessmanager.core.user.User;
+import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
 import eu.foobarssgamesmithy.chessmanager.persistence.match.MatchRepository;
 import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MatchEntity;
 import org.springframework.data.util.Streamable;
@@ -22,14 +24,19 @@ public class MatchManagerImpl implements MatchManager {
 
     private final BoEtyMapper mapper;
 
-    public MatchManagerImpl(MatchRepository matchRepository, BoEtyMapper mapper) {
+    private final User userFacade;
+
+    public MatchManagerImpl(MatchRepository matchRepository, BoEtyMapper mapper, User userFacade) {
         this.matchRepository = matchRepository;
         this.mapper = mapper;
+        this.userFacade = userFacade;
     }
 
     @Transactional
     @Override
     public MatchBo saveMatch(MatchBo match) {
+        UserBo user = this.userFacade.getUser();
+        match.setUser(user);
         MatchEntity entity = this.matchRepository.save(this.mapper.mapMatch(match));
         return this.mapper.mapMatch(entity);
     }
