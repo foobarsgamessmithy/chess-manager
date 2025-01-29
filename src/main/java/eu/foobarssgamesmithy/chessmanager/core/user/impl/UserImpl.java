@@ -6,6 +6,8 @@ import eu.foobarssgamesmithy.chessmanager.core.user.User;
 import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
 import eu.foobarssgamesmithy.chessmanager.persistence.user.UserRepository;
 import eu.foobarssgamesmithy.chessmanager.persistence.user.entity.UserEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +22,8 @@ public class UserImpl implements User {
 
     private final BoEtyMapper mapper;
 
+    private final Logger logger = LoggerFactory.getLogger(UserImpl.class);
+
     public UserImpl(AuthenticationFacade authenticationFacade, UserRepository repository, BoEtyMapper mapper) {
         this.authenticationFacade = authenticationFacade;
         this.repository = repository;
@@ -32,6 +36,7 @@ public class UserImpl implements User {
         String userName = this.authenticationFacade.getUserName();
         Optional<UserEntity> userOpt = this.repository.findByUserName(userName);
         UserEntity user = userOpt.orElseGet(() -> this.repository.save(UserEntity.builder().userName(userName).build()));
+        this.logger.debug("Get user from repository: {}.", user);
         return this.mapper.mapUser(user);
     }
 }

@@ -3,8 +3,12 @@ package eu.foobarssgamesmithy.chessmanager.service;
 import eu.foobarssgamesmithy.chessmanager.core.match.MatchManager;
 import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchException;
+import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchNotFoundException;
+import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchNotOwnedByUserException;
 import eu.foobarssgamesmithy.chessmanager.service.data.MatchDto;
 import eu.foobarssgamesmithy.chessmanager.service.mapper.DtoBoMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +23,8 @@ public class MatchController {
 
     private final DtoBoMapper mapper;
 
+    private final Logger logger = LoggerFactory.getLogger(MatchController.class);
+
     public MatchController(MatchManager matchManager, DtoBoMapper mapper) {
         this.matchManager = matchManager;
         this.mapper = mapper;
@@ -31,8 +37,7 @@ public class MatchController {
             match = this.matchManager.saveMatch(match);
             return ResponseEntity.ok().body(this.mapper.mapMatch(match));
         } catch (Throwable ex) {
-            // TODO add Log
-            System.out.println(ex.getMessage());
+            logger.warn("Could not create match: {}", matchDto);
             return ResponseEntity.badRequest().build();
         }
     }
@@ -41,8 +46,14 @@ public class MatchController {
     public ResponseEntity<String> deleteMatch(@PathVariable("id") String id){
         try {
             this.matchManager.deleteMatch(UUID.fromString(id));
-        } catch (MatchException e) {
+        } catch (MatchNotFoundException e) {
+            this.logger.info("Try to delete match which does not exist with id {}.", id);
             return ResponseEntity.notFound().build();
+        } catch (MatchNotOwnedByUserException e) {
+            this.logger.warn("User {} tries to delete match {}, which is owned by another user.", e.getCausedByUser(), id);
+            return ResponseEntity.badRequest().build();
+        } catch (MatchException e) {
+            return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok().build();
     }
@@ -53,6 +64,7 @@ public class MatchController {
             MatchBo match = this.matchManager.getMatch(UUID.fromString(id));
             return ResponseEntity.ok().body(this.mapper.mapMatch(match));
         } catch (MatchException e) {
+            this.logger.info("Match with id {} could not be found.", id);
             return ResponseEntity.notFound().build();
         }
     }

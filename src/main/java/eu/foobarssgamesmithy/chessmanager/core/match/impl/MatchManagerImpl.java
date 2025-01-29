@@ -1,14 +1,16 @@
 package eu.foobarssgamesmithy.chessmanager.core.match.impl;
 
+import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
 import eu.foobarssgamesmithy.chessmanager.core.match.MatchManager;
 import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchException;
 import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchExceptionFactory;
-import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
 import eu.foobarssgamesmithy.chessmanager.core.user.User;
 import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
 import eu.foobarssgamesmithy.chessmanager.persistence.match.MatchRepository;
 import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MatchEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +27,8 @@ public class MatchManagerImpl implements MatchManager {
     private final BoEtyMapper mapper;
 
     private final User userFacade;
+
+    private final Logger logger = LoggerFactory.getLogger(MatchManagerImpl.class);
 
     public MatchManagerImpl(MatchRepository matchRepository, BoEtyMapper mapper, User userFacade) {
         this.matchRepository = matchRepository;
@@ -59,8 +63,10 @@ public class MatchManagerImpl implements MatchManager {
         MatchBo match = this.mapper.mapMatch(matchOpt.get());
         UserBo user = this.userFacade.getUser();
         if(!user.equals(match.getUser())) {
+            this.logger.debug("User {} forbid to load match {}", user, match);
             throw MatchExceptionFactory.notOwner(id, user);
         }
+        this.logger.debug("Load match: {}", match);
         return match;
     }
 
