@@ -37,7 +37,7 @@ public class MatchController {
             match = this.matchManager.saveMatch(match);
             return ResponseEntity.ok().body(this.mapper.mapMatch(match));
         } catch (Throwable ex) {
-            LOG.warn("Could not create match: {}", matchDto);
+            LOG.warn("Could not create match {} with error {}", matchDto, ex.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }
