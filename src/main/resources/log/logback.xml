@@ -14,10 +14,34 @@
             <charset>utf8</charset>
         </encoder>
     </appender>
-    <root level="INFO">
-        <appender-ref ref="console"/>
-        <!-- uncomment this to have also JSON logs -->
-        <!--<appender-ref ref="logstash"/>-->
-        <!--<appender-ref ref="flatfile"/>-->
-    </root>
+
+    <appender name="file"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/chess_manager.log</file>
+        <encoder
+                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %C{1} [%t] %m%n</Pattern>
+        </encoder>
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily and when the file reaches 5 MegaBytes -->
+            <fileNamePattern>${LOG_PATH}/archived/chess_manager-%d{yyyy-MM-dd}-%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy">
+                <maxFileSize>5MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+    <springProfile name="dev | insecure | test">
+        <root level="INFO">
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="file"/>
+        </root>
+    </springProfile>
 </configuration>

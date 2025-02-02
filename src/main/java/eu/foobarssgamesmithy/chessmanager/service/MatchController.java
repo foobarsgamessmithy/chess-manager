@@ -23,7 +23,7 @@ public class MatchController {
 
     private final DtoBoMapper mapper;
 
-    private final Logger logger = LoggerFactory.getLogger(MatchController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MatchController.class);
 
     public MatchController(MatchManager matchManager, DtoBoMapper mapper) {
         this.matchManager = matchManager;
@@ -37,7 +37,7 @@ public class MatchController {
             match = this.matchManager.saveMatch(match);
             return ResponseEntity.ok().body(this.mapper.mapMatch(match));
         } catch (Throwable ex) {
-            logger.warn("Could not create match: {}", matchDto);
+            LOG.warn("Could not create match: {}", matchDto);
             return ResponseEntity.badRequest().build();
         }
     }
@@ -47,10 +47,10 @@ public class MatchController {
         try {
             this.matchManager.deleteMatch(UUID.fromString(id));
         } catch (MatchNotFoundException e) {
-            this.logger.info("Try to delete match which does not exist with id {}.", id);
+            LOG.info("Try to delete match which does not exist with id {}.", id);
             return ResponseEntity.notFound().build();
         } catch (MatchNotOwnedByUserException e) {
-            this.logger.warn("User {} tries to delete match {}, which is owned by another user.", e.getCausedByUser(), id);
+            LOG.warn("User {} tries to delete match {}, which is owned by another user.", e.getCausedByUser(), id);
             return ResponseEntity.badRequest().build();
         } catch (MatchException e) {
             return ResponseEntity.badRequest().build();
@@ -64,7 +64,7 @@ public class MatchController {
             MatchBo match = this.matchManager.getMatch(UUID.fromString(id));
             return ResponseEntity.ok().body(this.mapper.mapMatch(match));
         } catch (MatchException e) {
-            this.logger.info("Match with id {} could not be found.", id);
+            LOG.info("Match with id {} could not be found.", id);
             return ResponseEntity.notFound().build();
         }
     }

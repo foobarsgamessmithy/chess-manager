@@ -22,7 +22,7 @@ public class UserImpl implements User {
 
     private final BoEtyMapper mapper;
 
-    private final Logger logger = LoggerFactory.getLogger(UserImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserImpl.class);
 
     public UserImpl(AuthenticationFacade authenticationFacade, UserRepository repository, BoEtyMapper mapper) {
         this.authenticationFacade = authenticationFacade;
@@ -36,7 +36,7 @@ public class UserImpl implements User {
         String userName = this.authenticationFacade.getUserName();
         Optional<UserEntity> userOpt = this.repository.findByUserName(userName);
         UserEntity user = userOpt.orElseGet(() -> this.repository.save(UserEntity.builder().userName(userName).build()));
-        this.logger.debug("Get user from repository: {}.", user);
+        LOG.debug("Get user from repository: {}.", user);
         return this.mapper.mapUser(user);
     }
 }

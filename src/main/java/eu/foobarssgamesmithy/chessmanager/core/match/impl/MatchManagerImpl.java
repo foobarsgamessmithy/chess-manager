@@ -28,7 +28,7 @@ public class MatchManagerImpl implements MatchManager {
 
     private final User userFacade;
 
-    private final Logger logger = LoggerFactory.getLogger(MatchManagerImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MatchManagerImpl.class);
 
     public MatchManagerImpl(MatchRepository matchRepository, BoEtyMapper mapper, User userFacade) {
         this.matchRepository = matchRepository;
@@ -63,10 +63,10 @@ public class MatchManagerImpl implements MatchManager {
         MatchBo match = this.mapper.mapMatch(matchOpt.get());
         UserBo user = this.userFacade.getUser();
         if(!user.equals(match.getUser())) {
-            this.logger.debug("User {} forbid to load match {}", user, match);
+            LOG.info("User {} forbid to load match {}", user, match);
             throw MatchExceptionFactory.notOwner(id, user);
         }
-        this.logger.debug("Load match: {}", match);
+        LOG.debug("Load match: {}", match);
         return match;
     }
 

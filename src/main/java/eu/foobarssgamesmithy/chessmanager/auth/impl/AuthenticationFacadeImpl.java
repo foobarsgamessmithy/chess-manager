@@ -11,18 +11,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationFacadeImpl implements AuthenticationFacade {
 
-    private final Logger logger = LoggerFactory.getLogger(AuthenticationFacadeImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AuthenticationFacadeImpl.class);
 
     @Override
     public String getUserName() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
-        this.logger.debug("User name spring SecurityContext: {}.", userName);
+        LOG.debug("User name spring SecurityContext: {}.", userName);
         Object rawPrincipal = authentication.getPrincipal();
         if(Jwt.class.isAssignableFrom(rawPrincipal.getClass())){
             Jwt jwtPrincipal = (Jwt) rawPrincipal;
             userName = jwtPrincipal.getClaim("preferred_username");
-            this.logger.debug("User name from JWT token {}.", userName);
+            LOG.debug("User name from JWT token {}.", userName);
         }
         return userName;
     }
