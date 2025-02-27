@@ -12,6 +12,7 @@ public class MatchExceptionFactory{
 
     public static MatchException notOwner(UUID id, UserBo user) {
         return new MatchNotOwnedByUserException(
-                String.format("Match with id %s does not belong to user %s.", id, user.getUserName()));
+                String.format("Match with id %s does not belong to user %s.", id, user.getUserName()),
+                user.getUserName());
     }
 }

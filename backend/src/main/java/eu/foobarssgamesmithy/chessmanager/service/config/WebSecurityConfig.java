@@ -35,8 +35,8 @@ public class WebSecurityConfig {
     };
 
     @Bean
-    @Profile(SpringProfiles.DEVELOPMENT)
-    public SecurityFilterChain filterChain(HttpSecurity http,
+    @Profile(SpringProfiles.PRODUCTION)
+    public SecurityFilterChain prodFilterChain(HttpSecurity http,
                                            Converter<Jwt, AbstractAuthenticationToken> authenticationConverter)
             throws Exception {
         http.oauth2ResourceServer(resourceServer -> resourceServer.jwt(jwtDecoder ->
@@ -45,7 +45,26 @@ public class WebSecurityConfig {
                 // For now, we disable csrf because only clients will send requests
                 // https://docs.spring.io/spring-security/reference/features/exploits/csrf.html
                 .csrf(AbstractHttpConfigurer::disable)
-                // FIXME: disable for h2 console. should be moved to development profile later
+                .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers(PROTECTED_PATH).authenticated()
+                        .requestMatchers(OPEN_PATH).permitAll()
+                    .anyRequest().denyAll()
+                );
+        return http.build();
+    }
+
+    @Bean
+    @Profile(SpringProfiles.DEVELOPMENT)
+    public SecurityFilterChain devFilterChain(HttpSecurity http,
+                                           Converter<Jwt, AbstractAuthenticationToken> authenticationConverter)
+            throws Exception {
+        http.oauth2ResourceServer(resourceServer -> resourceServer.jwt(jwtDecoder ->
+                jwtDecoder.jwtAuthenticationConverter(authenticationConverter)));
+        http
+                // For now, we disable csrf because only clients will send requests
+                // https://docs.spring.io/spring-security/reference/features/exploits/csrf.html
+                .csrf(AbstractHttpConfigurer::disable)
+                // disable for h2 console.
                 .headers(httpSecurityHeadersConfigurer ->
                         httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests((requests) -> requests
