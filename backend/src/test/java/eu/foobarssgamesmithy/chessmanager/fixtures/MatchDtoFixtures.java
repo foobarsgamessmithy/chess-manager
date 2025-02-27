@@ -1,6 +1,6 @@
 package eu.foobarssgamesmithy.chessmanager.fixtures;
 
-import eu.foobarssgamesmithy.chessmanager.service.data.*;
+import eu.foobarssgamesmithy.chessmanager.service.match.data.*;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;

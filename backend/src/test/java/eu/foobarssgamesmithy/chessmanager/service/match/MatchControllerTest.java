@@ -1,11 +1,11 @@
-package eu.foobarssgamesmithy.chessmanager.service;
+package eu.foobarssgamesmithy.chessmanager.service.match;
 
 import com.c4_soft.springaddons.security.oauth2.test.annotations.WithMockAuthentication;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.foobarssgamesmithy.chessmanager.common.SpringProfiles;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchDtoFixtures;
-import eu.foobarssgamesmithy.chessmanager.service.data.MatchDto;
+import eu.foobarssgamesmithy.chessmanager.service.match.data.MatchDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

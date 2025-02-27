@@ -3,9 +3,9 @@ package eu.foobarssgamesmithy.chessmanager.fixtures;
 import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MatchEntity;
 import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MoveEntity;
 import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.ResultEntity;
-import eu.foobarssgamesmithy.chessmanager.service.data.MatchEndReasonTyp;
-import eu.foobarssgamesmithy.chessmanager.service.data.PlayedPieces;
-import eu.foobarssgamesmithy.chessmanager.service.data.WinnerTyp;
+import eu.foobarssgamesmithy.chessmanager.service.match.data.MatchEndReasonTyp;
+import eu.foobarssgamesmithy.chessmanager.service.match.data.PlayedPieces;
+import eu.foobarssgamesmithy.chessmanager.service.match.data.WinnerTyp;
 
 import java.util.List;
 import java.util.UUID;

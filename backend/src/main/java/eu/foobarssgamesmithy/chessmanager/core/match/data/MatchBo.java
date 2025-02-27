@@ -1,7 +1,7 @@
 package eu.foobarssgamesmithy.chessmanager.core.match.data;
 
 import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
-import eu.foobarssgamesmithy.chessmanager.service.data.PlayedPieces;
+import eu.foobarssgamesmithy.chessmanager.service.match.data.PlayedPieces;
 import lombok.*;
 
 import java.time.ZonedDateTime;

@@ -24,8 +24,11 @@ To use keycloak you can use the [local](https://www.keycloak.org/downloads) inst
 
 The realm configuration must be imported via [realm.json](./infrastucture/keycloak/realm-export.json). Test users are also included in the end of the file. Also, the client secrets are set in the file. Of course this secrets should not be used for production. 
 
-The connection from keycloak to the chessmanager app is done with oauth2 like in is this [example](https://www.baeldung.com/spring-boot-keycloak).
+The connection from keycloak to the chessmanager app is done with oauth2 like in is this [example](https://www.baeldung.com/spring-boot-keycloak). You just have to annotated your tests with `@WithMockAuthentication` and the requests within the test are authenticated. It is possible to set values in the annotation for different users, authorities etc.
 
+#### Testing with keycloak
+
+A really convenient way to write spring boot tests (integration test) without disabling keycloak is using [spring-addons](https://github.com/ch4mpy/spring-addons/).
 
 #### Roles
 Roles are not used in application now.

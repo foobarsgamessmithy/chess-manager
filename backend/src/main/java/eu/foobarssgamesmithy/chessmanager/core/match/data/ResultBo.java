@@ -1,7 +1,7 @@
 package eu.foobarssgamesmithy.chessmanager.core.match.data;
 
-import eu.foobarssgamesmithy.chessmanager.service.data.MatchEndReasonTyp;
-import eu.foobarssgamesmithy.chessmanager.service.data.WinnerTyp;
+import eu.foobarssgamesmithy.chessmanager.service.match.data.MatchEndReasonTyp;
+import eu.foobarssgamesmithy.chessmanager.service.match.data.WinnerTyp;
 import lombok.*;
 
 import java.util.List;

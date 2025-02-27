@@ -1,7 +1,7 @@
 package eu.foobarssgamesmithy.chessmanager.persistence.match.entity;
 
 import eu.foobarssgamesmithy.chessmanager.persistence.user.entity.UserEntity;
-import eu.foobarssgamesmithy.chessmanager.service.data.PlayedPieces;
+import eu.foobarssgamesmithy.chessmanager.service.match.data.PlayedPieces;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

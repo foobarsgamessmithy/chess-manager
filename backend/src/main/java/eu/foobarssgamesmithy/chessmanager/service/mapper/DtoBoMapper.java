@@ -1,7 +1,9 @@
 package eu.foobarssgamesmithy.chessmanager.service.mapper;
 
 import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
-import eu.foobarssgamesmithy.chessmanager.service.data.MatchDto;
+import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
+import eu.foobarssgamesmithy.chessmanager.service.match.data.MatchDto;
+import eu.foobarssgamesmithy.chessmanager.service.user.data.UserDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -24,4 +26,10 @@ public interface DtoBoMapper {
     }
 
     List<MatchDto> mapMatches(List<MatchBo> matches);
+
+    @Mapping(target = "lichessUsername", ignore = true)
+    UserDto mapUser(UserBo user);
+
+    @Mapping(target = "id", ignore = true)
+    UserBo mapUser(UserDto user);
 }

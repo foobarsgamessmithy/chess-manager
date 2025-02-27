@@ -1,7 +1,7 @@
 package eu.foobarssgamesmithy.chessmanager.persistence.match.entity;
 
-import eu.foobarssgamesmithy.chessmanager.service.data.MatchEndReasonTyp;
-import eu.foobarssgamesmithy.chessmanager.service.data.WinnerTyp;
+import eu.foobarssgamesmithy.chessmanager.service.match.data.MatchEndReasonTyp;
+import eu.foobarssgamesmithy.chessmanager.service.match.data.WinnerTyp;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -4,6 +4,8 @@ import eu.foobarssgamesmithy.chessmanager.auth.AuthenticationFacade;
 import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
 import eu.foobarssgamesmithy.chessmanager.core.user.User;
 import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
+import eu.foobarssgamesmithy.chessmanager.core.user.exception.UserException;
+import eu.foobarssgamesmithy.chessmanager.core.user.exception.UserExceptionFactory;
 import eu.foobarssgamesmithy.chessmanager.persistence.user.UserRepository;
 import eu.foobarssgamesmithy.chessmanager.persistence.user.entity.UserEntity;
 import org.slf4j.Logger;
@@ -38,5 +40,12 @@ public class UserImpl implements User {
         UserEntity user = userOpt.orElseGet(() -> this.repository.save(UserEntity.builder().userName(userName).build()));
         LOG.debug("Get user from repository: {}.", user);
         return this.mapper.mapUser(user);
+    }
+
+    @Override
+    public UserBo getUserById(String userId) throws UserException {
+        Optional<UserEntity> userOpt = this.repository.findByUserName(userId);
+        UserEntity userEty = userOpt.orElseThrow(() -> UserExceptionFactory.notFound(userId));
+        return this.mapper.mapUser(userEty);
     }
 }

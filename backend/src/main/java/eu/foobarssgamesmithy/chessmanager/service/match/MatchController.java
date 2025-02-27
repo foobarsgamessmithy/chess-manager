@@ -1,11 +1,11 @@
-package eu.foobarssgamesmithy.chessmanager.service;
+package eu.foobarssgamesmithy.chessmanager.service.match;
 
 import eu.foobarssgamesmithy.chessmanager.core.match.MatchManager;
 import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchException;
 import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchNotFoundException;
 import eu.foobarssgamesmithy.chessmanager.core.match.exception.MatchNotOwnedByUserException;
-import eu.foobarssgamesmithy.chessmanager.service.data.MatchDto;
+import eu.foobarssgamesmithy.chessmanager.service.match.data.MatchDto;
 import eu.foobarssgamesmithy.chessmanager.service.mapper.DtoBoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
