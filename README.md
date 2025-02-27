@@ -6,6 +6,10 @@ A small spring boot application which can manage chess games for demonstration p
 
 A collection of request to interact with the application is in the [docs](./doc/bruno/chess%20manager). Use [Bruno](https://www.usebruno.com/downloads) client to send requests. When application runs with authentication, use the auth request first. All other request will use the auth token form the auth request.
 
+### Authentication request
+
+When the application is started with authentication enabled, you first have to authenticate at the keycloak server. Therefore, you obtain a jwt token which is used in all other requests. The configuration of this request can be found withing the [bruno file](./doc/bruno/chess%20manager/keycloak/Auth.bru). Change username and password to use other test users. Client id and client secret are defined in the [realm](./infrastucture/keycloak/realm-export.json).
+
 ## Development
 
 ### Available Profiles
@@ -16,11 +20,12 @@ A collection of request to interact with the application is in the [docs](./doc/
 
 ### Keycloak 
 
-For now [local](https://www.keycloak.org/downloads) keycloak installation is used. Using docker image is also possible. 
+To use keycloak you can use the [local](https://www.keycloak.org/downloads) installation or the docker image which is configured in the [docker-compose](./infrastucture/docker/docker-compose.yml) file.
 
-Keycloak is used with oauth2 like in is this [example](https://www.baeldung.com/spring-boot-keycloak).
+The realm configuration must be imported via [realm.json](./infrastucture/keycloak/realm-export.json). Test users are also included in the end of the file. Also, the client secrets are set in the file. Of course this secrets should not be used for production. 
 
-Realm configuration must be imported via [realm.json](./infrastucture/keycloak/realm-export.json). Test users are also included.
+The connection from keycloak to the chessmanager app is done with oauth2 like in is this [example](https://www.baeldung.com/spring-boot-keycloak).
+
 
 #### Roles
 Roles are not used in application now.
