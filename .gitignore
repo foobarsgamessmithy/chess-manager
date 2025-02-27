@@ -38,3 +38,4 @@ out/
 src/main/generated/
 backend/generated/
 *.log
+backend/src/main/generated/

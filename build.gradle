@@ -12,6 +12,8 @@ version = '0.0.1-SNAPSHOT'
 
 sourceSets.main.java.srcDirs = ['backend/src/main/java']
 sourceSets.main.resources.srcDir('backend/src/main/resources')
+sourceSets.test.java.srcDirs = ['backend/src/test/java']
+sourceSets.test.resources.srcDir('backend/src/test/resources')
 
 java {
 	toolchain {
