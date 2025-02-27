@@ -21,4 +21,7 @@ public class UserEntity {
     @Column(name = "user_name")
     private String userName;
 
+    @Column(name = "lichess_user_name")
+    private String lichessUsername;
+
 }

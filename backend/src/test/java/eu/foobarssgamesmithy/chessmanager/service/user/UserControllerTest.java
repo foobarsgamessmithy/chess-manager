@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -40,13 +41,32 @@ class UserControllerTest {
 
     @Test
     @WithMockAuthentication
-    void getMatch_shouldReturnOk() throws Exception {
+    void getUser_shouldReturnOk() throws Exception {
         // Arrange
         String userId = "foobar";
         UserDto expected = UserDtoFixtures.aUser();
 
         // Act
         ResultActions result = mockMvc.perform(get("/api/user/{userId}",userId));
+
+        // Assert
+        result.andExpect(status().isOk());
+        UserDto actual = new ObjectMapper()
+                .readValue(result.andReturn().getResponse().getContentAsString(), UserDto.class);
+        assertThat(actual)
+                .usingRecursiveComparison()
+                .isEqualTo(expected);
+    }
+
+    @Test
+    @WithMockAuthentication(name = "drdrunkenstein")
+    void setLichessUsername_shouldSetLichessUsernameCorrect() throws Exception {
+        // Arrange
+        String userId = "drdrunkenstein";
+        UserDto expected = UserDtoFixtures.anotherUser();
+
+        // Act
+        ResultActions result = mockMvc.perform(patch("/api/user/lichess/username/{userName}",userId));
 
         // Assert
         result.andExpect(status().isOk());

@@ -3,10 +3,14 @@ package eu.foobarssgamesmithy.chessmanager.core.mapper;
 import eu.foobarssgamesmithy.chessmanager.core.match.data.Castle;
 import eu.foobarssgamesmithy.chessmanager.core.match.data.MatchBo;
 import eu.foobarssgamesmithy.chessmanager.core.match.data.Promotion;
+import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchBoFixtures;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchEtyFixtures;
+import eu.foobarssgamesmithy.chessmanager.fixtures.UserBoFixtures;
+import eu.foobarssgamesmithy.chessmanager.fixtures.UserEtyFixtures;
 import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MatchEntity;
 import eu.foobarssgamesmithy.chessmanager.persistence.match.entity.MoveEntity;
+import eu.foobarssgamesmithy.chessmanager.persistence.user.entity.UserEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -44,6 +48,36 @@ class BoEtyMapperTest {
 
         // act
         MatchBo actual = this.underTest.mapMatch(match);
+
+        // assert
+        assertThat(actual)
+                .usingRecursiveComparison()
+                .isEqualTo(expected);
+    }
+
+    @Test
+    void mapUser_shouldMapUserBoFieldsCorrect(){
+        // arrange
+        UserBo expected = UserBoFixtures.anotherUser();
+        UserEntity user = UserEtyFixtures.anotherUser();
+
+        // act
+        UserBo actual = this.underTest.mapUser(user);
+
+        // assert
+        assertThat(actual)
+                .usingRecursiveComparison()
+                .isEqualTo(expected);
+    }
+
+    @Test
+    void mapUser_shouldMapUserEtyFieldsCorrect(){
+        // arrange
+        UserBo user = UserBoFixtures.anotherUser();
+        UserEntity expected = UserEtyFixtures.anotherUser();
+
+        // act
+        UserEntity actual = this.underTest.mapUser(user);
 
         // assert
         assertThat(actual)

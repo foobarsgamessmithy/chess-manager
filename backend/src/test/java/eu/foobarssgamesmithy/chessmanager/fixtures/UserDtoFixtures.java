@@ -10,4 +10,11 @@ public class UserDtoFixtures {
                 .build();
     }
 
+    public static UserDto anotherUser(){
+        return UserDto.builder()
+                .userName("drdrunkenstein")
+                .lichessUsername("drdrunkenstein")
+                .build();
+    }
+
 }

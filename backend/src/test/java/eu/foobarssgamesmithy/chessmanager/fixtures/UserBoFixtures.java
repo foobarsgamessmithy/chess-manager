@@ -11,4 +11,12 @@ public class UserBoFixtures {
                 .build();
     }
 
+    public static UserBo anotherUser(){
+        return UserBo.builder()
+                .id(2L)
+                .userName("drdrunkenstein")
+                .lichessUsername("drdrunkenstein")
+                .build();
+    }
+
 }

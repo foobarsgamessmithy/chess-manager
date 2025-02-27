@@ -11,4 +11,14 @@ public class UserEtyFixtures {
                 .build();
     }
 
+
+
+    public static UserEntity anotherUser(){
+        return UserEntity.builder()
+                .id(2L)
+                .userName("drdrunkenstein")
+                .lichessUsername("drdrunkenstein")
+                .build();
+    }
+
 }

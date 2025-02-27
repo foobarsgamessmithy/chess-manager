@@ -1,5 +1,6 @@
 INSERT INTO PLAYER (id, user_name)
-VALUES (10000, 'foobar');
+VALUES (10000, 'foobar'),
+(10001, 'drdrunkenstein');
 
 INSERT INTO RESULT (id, winner, reason)
 VALUES (10000, 'WHITE', 'CHECK_MADE');

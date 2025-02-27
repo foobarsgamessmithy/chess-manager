@@ -27,7 +27,6 @@ public interface DtoBoMapper {
 
     List<MatchDto> mapMatches(List<MatchBo> matches);
 
-    @Mapping(target = "lichessUsername", ignore = true)
     UserDto mapUser(UserBo user);
 
     @Mapping(target = "id", ignore = true)

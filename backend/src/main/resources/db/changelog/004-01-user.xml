@@ -12,6 +12,7 @@
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
             <column name="user_name" type="varchar(50)"/>
+            <column name="lichess_user_name" type="varchar(50)"/>
         </createTable>
     </changeSet>
 
