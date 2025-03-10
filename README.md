@@ -49,6 +49,21 @@ This test user are predefined.
 | drdrunkenstein    | drdrunkenstein         | user    |
 
 
+### Kafka
+
+Documentation links:
+https://www.baeldung.com/spring-kafka
+
+https://www.baeldung.com/ops/kafka-docker-setup
+
+#### Docker Container
+
+List topics by moving into _/bin_ folder and execute this command: `kafka-topics --list --bootstrap-server localhost:9092`
+
+List messages by moving into _/bin_ folder and execute this command: `kafka-console-consumer --bootstrap-server localhost:9092 --topic <TOPIC_NAME> --from-beginning`. Replace <TOPIC_NAME> with a topic from the list topics command.
+ 
+
+
 ### DB Access
 
 When application is running with dev profile the database is accessible via [browser](http://localhost:8081/h2). Credentials can be taken from `spring.datasource` in the [application.properties](./src/main/resources/application.properties)

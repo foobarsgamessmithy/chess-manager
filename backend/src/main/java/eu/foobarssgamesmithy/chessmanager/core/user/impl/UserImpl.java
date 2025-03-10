@@ -2,6 +2,7 @@ package eu.foobarssgamesmithy.chessmanager.core.user.impl;
 
 import eu.foobarssgamesmithy.chessmanager.auth.AuthenticationFacade;
 import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
+import eu.foobarssgamesmithy.chessmanager.core.messaging.MessagePublisher;
 import eu.foobarssgamesmithy.chessmanager.core.user.User;
 import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
 import eu.foobarssgamesmithy.chessmanager.core.user.exception.UserException;
@@ -16,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+import static eu.foobarssgamesmithy.chessmanager.core.messaging.MessageTopics.AUTO_IMPORT_TOPIC;
+
 @Component
 public class UserImpl implements User {
 
@@ -25,12 +28,16 @@ public class UserImpl implements User {
 
     private final BoEtyMapper mapper;
 
+    private final MessagePublisher messagePublisher;
+
     private static final Logger LOG = LoggerFactory.getLogger(UserImpl.class);
 
-    public UserImpl(AuthenticationFacade authenticationFacade, UserRepository repository, BoEtyMapper mapper) {
+    public UserImpl(AuthenticationFacade authenticationFacade, UserRepository repository, BoEtyMapper mapper,
+                    MessagePublisher messagePublisher) {
         this.authenticationFacade = authenticationFacade;
         this.repository = repository;
         this.mapper = mapper;
+        this.messagePublisher = messagePublisher;
     }
 
     @Transactional
@@ -64,7 +71,14 @@ public class UserImpl implements User {
     public UserBo setAutoImport(String userId, boolean isAutoImport) throws UserNotFoundException {
         UserEntity user = getUser(userId);
         user.setAutoImport(isAutoImport);
+        if(isAutoImport) {
+            publishSetAutoImport(userId);
+        }
         return this.mapper.mapUser(user);
+    }
+
+    private void publishSetAutoImport(String userId) {
+        messagePublisher.sendMessage(AUTO_IMPORT_TOPIC, userId);
     }
 
     private UserEntity getUser(String userId) throws UserNotFoundException{
