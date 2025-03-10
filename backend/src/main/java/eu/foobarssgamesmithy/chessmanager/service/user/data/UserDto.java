@@ -12,4 +12,6 @@ public class UserDto {
 
     private String lichessUsername;
 
+    private boolean autoImport;
+
 }

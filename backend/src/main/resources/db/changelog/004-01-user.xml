@@ -13,6 +13,7 @@
             </column>
             <column name="user_name" type="varchar(50)"/>
             <column name="lichess_user_name" type="varchar(50)"/>
+            <column name="auto_import" type="boolean" defaultValue="false" />
         </createTable>
     </changeSet>
 

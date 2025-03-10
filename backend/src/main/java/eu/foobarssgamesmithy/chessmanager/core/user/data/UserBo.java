@@ -13,4 +13,6 @@ public class UserBo {
     private String userName;
 
     private String lichessUsername;
+
+    private boolean autoImport;
 }

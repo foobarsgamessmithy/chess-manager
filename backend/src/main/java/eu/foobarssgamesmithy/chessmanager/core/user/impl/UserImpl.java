@@ -54,9 +54,21 @@ public class UserImpl implements User {
     @Transactional
     @Override
     public UserBo setLichessUsername(String userId, String lichessUserName) throws UserNotFoundException {
-        Optional<UserEntity> userOpt = this.repository.findByUserName(userId);
-        UserEntity user = userOpt.orElseThrow(() -> UserExceptionFactory.notFound(userId));
+        UserEntity user = getUser(userId);
         user.setLichessUsername(lichessUserName);
         return this.mapper.mapUser(user);
+    }
+
+    @Transactional
+    @Override
+    public UserBo setAutoImport(String userId, boolean isAutoImport) throws UserNotFoundException {
+        UserEntity user = getUser(userId);
+        user.setAutoImport(isAutoImport);
+        return this.mapper.mapUser(user);
+    }
+
+    private UserEntity getUser(String userId) throws UserNotFoundException{
+        Optional<UserEntity> userOpt = this.repository.findByUserName(userId);
+        return userOpt.orElseThrow(() -> UserExceptionFactory.notFound(userId));
     }
 }

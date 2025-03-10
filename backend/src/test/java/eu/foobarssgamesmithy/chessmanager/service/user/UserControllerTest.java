@@ -77,4 +77,26 @@ class UserControllerTest {
                 .isEqualTo(expected);
     }
 
+    @Test
+    @WithMockAuthentication(name = "drdrunkenstein")
+    void setAutoImport_shouldSetAutoImportCorrect() throws Exception {
+        // Arrange
+        String userId = "drdrunkenstein";
+        UserDto expected = UserDtoFixtures.anotherUser();
+        expected.setAutoImport(true);
+
+        mockMvc.perform(patch("/api/user/lichess/username/{userName}",userId));
+
+        // Act
+        ResultActions result = mockMvc.perform(patch("/api/user/lichess/autoimport/true", userId));
+
+        // Assert
+        result.andExpect(status().isOk());
+        UserDto actual = new ObjectMapper()
+                .readValue(result.andReturn().getResponse().getContentAsString(), UserDto.class);
+        assertThat(actual)
+                .usingRecursiveComparison()
+                .isEqualTo(expected);
+    }
+
 }

@@ -49,4 +49,16 @@ public class UserController {
         }
     }
 
+    @PatchMapping("/lichess/autoimport/{isAutoImport}")
+    public ResponseEntity<UserDto> setAutoImport(@PathVariable("isAutoImport") boolean isAutoImport){
+        try {
+            UserBo user = this.userFacade.getUser();
+            user = this.userFacade.setAutoImport(user.getUserName(), isAutoImport);
+            return ResponseEntity.ok().body(this.mapper.mapUser(user));
+        } catch (UserNotFoundException e) {
+            LOG.info("User with id {} could not be found.", e.getUserName());
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

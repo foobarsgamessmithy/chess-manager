@@ -24,4 +24,7 @@ public class UserEntity {
     @Column(name = "lichess_user_name")
     private String lichessUsername;
 
+    @Column(name = "auto_import")
+    private boolean autoImport;
+
 }
