@@ -47,6 +47,12 @@ public class MatchManagerImpl implements MatchManager {
 
     @Transactional
     @Override
+    public void saveMatches(List<MatchBo> matches) {
+        this.matchRepository.saveAll(this.mapper.mapMatchesToEntity(matches));
+    }
+
+    @Transactional
+    @Override
     public void deleteMatch(UUID uuid) throws MatchException {
         if(this.getMatch(uuid) != null) {
             this.matchRepository.deleteById(uuid);

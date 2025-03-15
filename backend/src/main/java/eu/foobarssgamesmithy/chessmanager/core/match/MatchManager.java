@@ -15,4 +15,6 @@ public interface MatchManager {
     List<MatchBo> getMatches();
 
     void deleteMatch(UUID uuid) throws MatchException;
+
+    void saveMatches(List<MatchBo> matches);
 }

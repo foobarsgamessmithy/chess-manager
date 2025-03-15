@@ -13,4 +13,6 @@ public interface User {
     UserBo setLichessUsername(String userId, String lichessUserName) throws UserNotFoundException;
 
     UserBo setAutoImport(String userId, boolean isAutoImport) throws UserNotFoundException;
+
+    UserBo getUsersByLichessName(String lichessUsername) throws UserNotFoundException;
 }

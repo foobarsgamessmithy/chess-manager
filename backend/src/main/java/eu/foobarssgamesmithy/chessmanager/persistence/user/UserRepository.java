@@ -10,4 +10,6 @@ public interface UserRepository extends CrudRepository<UserEntity, UUID> {
 
     Optional<UserEntity> findByUserName(String userName);
 
+    Optional<UserEntity> findByLichessUsername(String userName);
+
 }

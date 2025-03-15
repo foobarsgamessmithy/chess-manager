@@ -60,6 +60,14 @@ public class UserImpl implements User {
 
     @Transactional
     @Override
+    public UserBo getUsersByLichessName(String lichessUsername) throws UserNotFoundException {
+        Optional<UserEntity> userOpt = this.repository.findByLichessUsername(lichessUsername);
+        UserEntity userEty = userOpt.orElseThrow(() -> UserExceptionFactory.notFound(lichessUsername));
+        return this.mapper.mapUser(userEty);
+    }
+
+    @Transactional
+    @Override
     public UserBo setLichessUsername(String userId, String lichessUserName) throws UserNotFoundException {
         UserEntity user = getUser(userId);
         user.setLichessUsername(lichessUserName);

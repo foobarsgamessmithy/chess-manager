@@ -54,6 +54,8 @@ public interface BoEtyMapper {
 
     List<MatchBo> mapMatches(List<MatchEntity> list);
 
+    List<MatchEntity> mapMatchesToEntity(List<MatchBo> list);
+
     default MoveEntity map(String source){
         // TODO throw invalid exception
         MoveEntity move = MoveEntity.builder().build();
