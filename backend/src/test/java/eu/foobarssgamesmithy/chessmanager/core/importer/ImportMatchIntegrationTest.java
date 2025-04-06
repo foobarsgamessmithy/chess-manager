@@ -59,12 +59,12 @@ public class ImportMatchIntegrationTest {
         HttpEntity<String> entity = getStandardHttpEntity();
         HashMap<String, String> params = new HashMap<>();
 
-        when(restTemplate.exchange(urlTemplate, HttpMethod.GET, entity, String.class, params ))
+        when(restTemplate.exchange(urlTemplate, HttpMethod.GET, entity, String.class, params))
                 .thenReturn(new ResponseEntity<>(resultBody, HttpStatus.OK));
         when(this.authenticationFacade.getUserName()).thenReturn(chessManagerUsername);
 
         // Act
-        this.underTest.importMatch(lichessUserName);
+        this.underTest.importMatchesByLichessUser(lichessUserName);
 
         // Assert
         List<MatchBo> matchList = this.matchManager.getMatches();

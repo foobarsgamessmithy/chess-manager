@@ -23,6 +23,9 @@ public class MatchEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID matchId;
 
+    @Column(name = "external_id")
+    private String externalId;
+
     @Column(name = "played_at")
     private ZonedDateTime playedAt;
 

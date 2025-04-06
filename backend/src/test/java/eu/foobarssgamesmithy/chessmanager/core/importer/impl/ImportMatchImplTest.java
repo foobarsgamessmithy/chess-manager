@@ -44,7 +44,7 @@ class ImportMatchImplTest {
     private ArgumentCaptor<List<MatchBo>> matchesCaptor;
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         this.underTest = new ImportMatchImpl(this.httpClientMock, Mappers.getMapper(LichessMapper.class),
                 this.matchManagerMock, this.userFacadeMock);
     }
@@ -61,7 +61,7 @@ class ImportMatchImplTest {
         when(this.userFacadeMock.getUsersByLichessName(lichessUsername)).thenReturn(UserBoFixtures.aOnlineUser());
 
         // Act
-        this.underTest.importMatch(lichessUsername);
+        this.underTest.importMatchesByLichessUser(lichessUsername);
 
         // Assert
         verify(this.matchManagerMock).saveMatches(this.matchesCaptor.capture());

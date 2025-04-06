@@ -1,8 +1,11 @@
 package eu.foobarssgamesmithy.chessmanager.service.match.data;
 
 public enum MatchEndReasonTyp {
-    CHECK_MADE,
+    MATE,
+    DRAW,
     OUTOFTIME,
+    STALEMATE,
     RESIGN,
-    NOSTART
+    NOSTART,
+    UNKOWN
 }

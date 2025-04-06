@@ -18,6 +18,7 @@ public interface DtoBoMapper {
 
     @Mapping(target = "result.id", ignore = true)
     @Mapping(target = "user", ignore = true)
+    @Mapping(target = "externalId", ignore = true)
     MatchBo mapMatch(MatchDto match);
 
     default String map(ZonedDateTime zonedDateTime) {

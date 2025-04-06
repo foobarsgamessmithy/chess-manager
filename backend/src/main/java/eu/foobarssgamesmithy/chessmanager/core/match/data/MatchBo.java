@@ -15,6 +15,8 @@ public class MatchBo {
 
     private UUID id;
 
+    private String externalId;
+
     private ZonedDateTime playedAt;
 
     private PlayedPieces playedWith;

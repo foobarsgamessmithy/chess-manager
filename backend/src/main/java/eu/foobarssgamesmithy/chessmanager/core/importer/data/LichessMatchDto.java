@@ -13,6 +13,8 @@ public class LichessMatchDto {
 
     private String moves;
 
+    private String id;
+
     private LichessPlayersDto players;
 
     private String createdAt;

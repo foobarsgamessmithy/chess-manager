@@ -54,7 +54,7 @@ public class MatchManagerImpl implements MatchManager {
     @Transactional
     @Override
     public void deleteMatch(UUID uuid) throws MatchException {
-        if(this.getMatch(uuid) != null) {
+        if (this.getMatch(uuid) != null) {
             this.matchRepository.deleteById(uuid);
         }
     }
@@ -63,12 +63,12 @@ public class MatchManagerImpl implements MatchManager {
     @Override
     public MatchBo getMatch(UUID id) throws MatchException {
         Optional<MatchEntity> matchOpt = this.matchRepository.findById(id);
-        if(matchOpt.isEmpty()){
+        if (matchOpt.isEmpty()) {
             throw MatchExceptionFactory.notFound(id);
         }
         MatchBo match = this.mapper.mapMatch(matchOpt.get());
         UserBo user = this.userFacade.getUser();
-        if(!user.equals(match.getUser())) {
+        if (!user.equals(match.getUser())) {
             LOG.info("User {} forbid to load match {}", user, match);
             throw MatchExceptionFactory.notOwner(id, user);
         }
@@ -79,8 +79,14 @@ public class MatchManagerImpl implements MatchManager {
     @Transactional
     @Override
     public List<MatchBo> getMatches() {
-        List<MatchBo> matches = this.mapper.mapMatches(Streamable.of(this.matchRepository.findAll()).toList());
         UserBo user = this.userFacade.getUser();
+        return getMatchesByUser(user);
+    }
+
+    @Transactional
+    @Override
+    public List<MatchBo> getMatchesByUser(UserBo user) {
+        List<MatchBo> matches = this.mapper.mapMatches(Streamable.of(this.matchRepository.findAll()).toList());
         return matches.stream().filter(m -> m.getUser().equals(user)).toList();
     }
 }

@@ -1,5 +1,6 @@
 package eu.foobarssgamesmithy.chessmanager.core.importer.impl;
 
+import eu.foobarssgamesmithy.chessmanager.core.importer.ImportMatch;
 import eu.foobarssgamesmithy.chessmanager.core.importer.mapper.ImporterMapper;
 import eu.foobarssgamesmithy.chessmanager.core.messaging.data.AutoImportMessage;
 import eu.foobarssgamesmithy.chessmanager.fixtures.MatchImportEntityFixtures;
@@ -29,12 +30,16 @@ class ManageImportImplTest {
     @Mock
     private ImporterRepository repositoryMock;
 
+    @Mock
+    private ImportMatch importMatchMock;
+
     @Captor
     private ArgumentCaptor<MatchImportEntity> matchImportCaptor;
 
     @BeforeEach
     void beforeEach() {
-        this.underTest = new ManageImportImpl(this.repositoryMock, Mappers.getMapper(ImporterMapper.class));
+        this.underTest = new ManageImportImpl(this.repositoryMock, Mappers.getMapper(ImporterMapper.class),
+                importMatchMock);
     }
 
     @Test

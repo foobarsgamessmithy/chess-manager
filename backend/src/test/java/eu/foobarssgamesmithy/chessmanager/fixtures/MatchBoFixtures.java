@@ -7,12 +7,12 @@ import eu.foobarssgamesmithy.chessmanager.service.match.data.PlayedPieces;
 import eu.foobarssgamesmithy.chessmanager.service.match.data.WinnerTyp;
 
 import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.*;
-import static eu.foobarssgamesmithy.chessmanager.fixtures.UserBoFixtures.aUser;
 import static eu.foobarssgamesmithy.chessmanager.fixtures.UserBoFixtures.aOnlineUser;
+import static eu.foobarssgamesmithy.chessmanager.fixtures.UserBoFixtures.aUser;
 
 public class MatchBoFixtures {
 
-    public static MatchBo aMatch(){
+    public static MatchBo aMatch() {
         return MatchBo.builder()
                 .id(MATCH_WITH_RESULT_UUID)
                 .playedAt(PLAYED_AT)
@@ -22,15 +22,15 @@ public class MatchBoFixtures {
                 .build();
     }
 
-    public static ResultBo aResult(){
+    public static ResultBo aResult() {
         return ResultBo.builder()
                 .winner(WinnerTyp.WHITE)
-                .reason(MatchEndReasonTyp.CHECK_MADE)
+                .reason(MatchEndReasonTyp.MATE)
                 .moves(MOVE_LIST)
                 .build();
     }
 
-    public static ResultBo aImportedResult(){
+    public static ResultBo aImportedResult() {
         return ResultBo.builder()
                 .winner(WinnerTyp.BLACK)
                 .reason(MatchEndReasonTyp.RESIGN)
@@ -41,6 +41,7 @@ public class MatchBoFixtures {
     public static Object aImportedMatch() {
         return MatchBo.builder()
                 .id(null)
+                .externalId("Q0iQs5Zi")
                 .playedAt(IMPORTED_MATCH_PLAYED_AT)
                 .playedWith(PlayedPieces.WHITE)
                 .result(aImportedResult())
