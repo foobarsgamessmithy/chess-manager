@@ -8,7 +8,7 @@ import eu.foobarssgamesmithy.chessmanager.service.match.data.WinnerTyp;
 
 import static eu.foobarssgamesmithy.chessmanager.fixtures.SharedFixtures.*;
 import static eu.foobarssgamesmithy.chessmanager.fixtures.UserBoFixtures.aUser;
-import static eu.foobarssgamesmithy.chessmanager.fixtures.UserBoFixtures.anotherUser;
+import static eu.foobarssgamesmithy.chessmanager.fixtures.UserBoFixtures.aOnlineUser;
 
 public class MatchBoFixtures {
 
@@ -44,7 +44,7 @@ public class MatchBoFixtures {
                 .playedAt(IMPORTED_MATCH_PLAYED_AT)
                 .playedWith(PlayedPieces.WHITE)
                 .result(aImportedResult())
-                .user(anotherUser())
+                .user(aOnlineUser())
                 .build();
     }
 }

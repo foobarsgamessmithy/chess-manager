@@ -33,7 +33,7 @@ class UserControllerTest {
         String userId = "notFound";
 
         // Act
-        ResultActions result = mockMvc.perform(get("/api/user/{userId}",userId));
+        ResultActions result = mockMvc.perform(get("/api/user/{userId}", userId));
 
         // Assert
         result.andExpect(status().isNotFound());
@@ -47,7 +47,7 @@ class UserControllerTest {
         UserDto expected = UserDtoFixtures.aUser();
 
         // Act
-        ResultActions result = mockMvc.perform(get("/api/user/{userId}",userId));
+        ResultActions result = mockMvc.perform(get("/api/user/{userId}", userId));
 
         // Assert
         result.andExpect(status().isOk());
@@ -59,14 +59,15 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockAuthentication(name = "drdrunkenstein")
+    @WithMockAuthentication(name = "MagnusC")
     void setLichessUsername_shouldSetLichessUsernameCorrect() throws Exception {
         // Arrange
-        String userId = "drdrunkenstein";
-        UserDto expected = UserDtoFixtures.anotherUser();
+        String lichessUserName = "drdrunkenstein";
+        UserDto expected = UserDtoFixtures.aOnlineUser();
+        expected.setAutoImport(false);
 
         // Act
-        ResultActions result = mockMvc.perform(patch("/api/user/lichess/username/{userName}",userId));
+        ResultActions result = mockMvc.perform(patch("/api/user/lichess/username/{userName}", lichessUserName));
 
         // Assert
         result.andExpect(status().isOk());
@@ -78,14 +79,14 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockAuthentication(name = "drdrunkenstein")
+    @WithMockAuthentication(name = "MagnusC")
     void setAutoImport_shouldSetAutoImportCorrect() throws Exception {
         // Arrange
         String userId = "drdrunkenstein";
-        UserDto expected = UserDtoFixtures.anotherUser();
+        UserDto expected = UserDtoFixtures.aOnlineUser();
         expected.setAutoImport(true);
 
-        mockMvc.perform(patch("/api/user/lichess/username/{userName}",userId));
+        mockMvc.perform(patch("/api/user/lichess/username/{userName}", userId));
 
         // Act
         ResultActions result = mockMvc.perform(patch("/api/user/lichess/autoimport/true", userId));

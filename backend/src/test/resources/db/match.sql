@@ -1,7 +1,7 @@
 MERGE INTO PLAYER (id, user_name, lichess_user_name) KEY(id)
 VALUES (10000, 'foobar', null),
-(10001, 'drdrunkenstein', null),
-(10002, 'MagnusC', 'drdrunkenstein');
+(10001, 'MagnusC', 'drdrunkenstein'),
+(10002, 'HildegardOffline', null);
 
 MERGE INTO RESULT (id, winner, reason)
 VALUES (10000, 'WHITE', 'CHECK_MADE');

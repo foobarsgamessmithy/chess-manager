@@ -2,6 +2,7 @@ package eu.foobarssgamesmithy.chessmanager.core.user.impl;
 
 import eu.foobarssgamesmithy.chessmanager.auth.AuthenticationFacade;
 import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
+import eu.foobarssgamesmithy.chessmanager.core.mapper.MessageMapper;
 import eu.foobarssgamesmithy.chessmanager.core.messaging.MessagePublisher;
 import eu.foobarssgamesmithy.chessmanager.core.user.User;
 import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
@@ -30,14 +31,17 @@ public class UserImpl implements User {
 
     private final MessagePublisher messagePublisher;
 
+    private final MessageMapper messageMapper;
+
     private static final Logger LOG = LoggerFactory.getLogger(UserImpl.class);
 
     public UserImpl(AuthenticationFacade authenticationFacade, UserRepository repository, BoEtyMapper mapper,
-                    MessagePublisher messagePublisher) {
+                    MessagePublisher messagePublisher, MessageMapper messageMapper) {
         this.authenticationFacade = authenticationFacade;
         this.repository = repository;
         this.mapper = mapper;
         this.messagePublisher = messagePublisher;
+        this.messageMapper = messageMapper;
     }
 
     @Transactional
@@ -79,14 +83,13 @@ public class UserImpl implements User {
     public UserBo setAutoImport(String userId, boolean isAutoImport) throws UserNotFoundException {
         UserEntity user = getUser(userId);
         user.setAutoImport(isAutoImport);
-        if(isAutoImport) {
-            publishSetAutoImport(userId);
-        }
+
+        publishSetAutoImport(this.mapper.mapUser(user));
         return this.mapper.mapUser(user);
     }
 
-    private void publishSetAutoImport(String userId) {
-        messagePublisher.sendMessage(AUTO_IMPORT_TOPIC, userId);
+    private void publishSetAutoImport(UserBo user) {
+        messagePublisher.sendMessage(AUTO_IMPORT_TOPIC, this.messageMapper.mapFromUser(user));
     }
 
     private UserEntity getUser(String userId) throws UserNotFoundException{

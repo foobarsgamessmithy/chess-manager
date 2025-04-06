@@ -23,7 +23,7 @@ public class HttpClient {
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(url);
-        params.forEach((key, value) -> uriComponentsBuilder.queryParam(key, "{" + key + "}"));
+        params.forEach((key, value) -> uriComponentsBuilder.queryParam(key, String.format("{%s}", key)));
         String urlTemplate = uriComponentsBuilder.encode().toUriString();
 
         ResponseEntity<String> result = restTemplate.exchange(urlTemplate, HttpMethod.GET, entity,

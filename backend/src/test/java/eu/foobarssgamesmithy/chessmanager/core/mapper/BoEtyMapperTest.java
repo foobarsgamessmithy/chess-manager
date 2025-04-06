@@ -58,8 +58,8 @@ class BoEtyMapperTest {
     @Test
     void mapUser_shouldMapUserBoFieldsCorrect(){
         // arrange
-        UserBo expected = UserBoFixtures.anotherUser();
-        UserEntity user = UserEtyFixtures.anotherUser();
+        UserBo expected = UserBoFixtures.aOnlineUser();
+        UserEntity user = UserEtyFixtures.aOnlineUser();
 
         // act
         UserBo actual = this.underTest.mapUser(user);
@@ -73,8 +73,8 @@ class BoEtyMapperTest {
     @Test
     void mapUser_shouldMapUserEtyFieldsCorrect(){
         // arrange
-        UserBo user = UserBoFixtures.anotherUser();
-        UserEntity expected = UserEtyFixtures.anotherUser();
+        UserBo user = UserBoFixtures.aOnlineUser();
+        UserEntity expected = UserEtyFixtures.aOnlineUser();
 
         // act
         UserEntity actual = this.underTest.mapUser(user);

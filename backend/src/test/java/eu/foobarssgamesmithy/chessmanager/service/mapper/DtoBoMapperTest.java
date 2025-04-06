@@ -51,8 +51,8 @@ class DtoBoMapperTest {
     @Test
     void mapUser_shouldMapUserDtoFieldsCorrect(){
         // arrange
-        UserBo user  = UserBoFixtures.anotherUser();
-        UserDto expected = UserDtoFixtures.anotherUser();
+        UserBo user  = UserBoFixtures.aOnlineUser();
+        UserDto expected = UserDtoFixtures.aOnlineUser();
 
         // act
         UserDto actual = this.underTest.mapUser(user);
@@ -66,9 +66,9 @@ class DtoBoMapperTest {
     @Test
     void mapUser_shouldMapUserBoFieldsCorrect(){
         // arrange
-        UserBo expected = UserBoFixtures.anotherUser();
+        UserBo expected = UserBoFixtures.aOnlineUser();
         expected.setId(null);
-        UserDto user = UserDtoFixtures.anotherUser();
+        UserDto user = UserDtoFixtures.aOnlineUser();
 
         // act
         UserBo actual = this.underTest.mapUser(user);

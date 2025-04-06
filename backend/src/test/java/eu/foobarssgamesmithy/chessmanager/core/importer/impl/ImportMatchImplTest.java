@@ -58,7 +58,7 @@ class ImportMatchImplTest {
                 .replace("\r", "");
 
         when(this.httpClientMock.get(any(), any())).thenReturn(lichessResult);
-        when(this.userFacadeMock.getUsersByLichessName(lichessUsername)).thenReturn(UserBoFixtures.anotherUser());
+        when(this.userFacadeMock.getUsersByLichessName(lichessUsername)).thenReturn(UserBoFixtures.aOnlineUser());
 
         // Act
         this.underTest.importMatch(lichessUsername);

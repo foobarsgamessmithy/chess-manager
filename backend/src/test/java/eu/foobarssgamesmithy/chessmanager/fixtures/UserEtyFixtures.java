@@ -4,7 +4,7 @@ import eu.foobarssgamesmithy.chessmanager.persistence.user.entity.UserEntity;
 
 public class UserEtyFixtures {
 
-    public static UserEntity aUser(){
+    public static UserEntity aUser() {
         return UserEntity.builder()
                 .id(1L)
                 .userName("foobar")
@@ -12,12 +12,12 @@ public class UserEtyFixtures {
     }
 
 
-
-    public static UserEntity anotherUser(){
+    public static UserEntity aOnlineUser() {
         return UserEntity.builder()
                 .id(2L)
-                .userName("drdrunkenstein")
+                .userName("MagnusC")
                 .lichessUsername("drdrunkenstein")
+                .autoImport(true)
                 .build();
     }
 

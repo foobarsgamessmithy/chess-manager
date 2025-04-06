@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.31.xsd">
+
+    <changeSet id="0001-create_table_match_import" author="aboll">
+        <createSequence schemaName="public" startValue="1" incrementBy="1" ordered="true" sequenceName="MATCH_IMPORT_SEQ"/>
+        <createTable schemaName="public" tableName="MATCH_IMPORT">
+            <column name="id" type="bigint" autoIncrement="true"/>
+            <column name="user_name" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="lichess_user_name" type="varchar(50)"/>
+            <column name="last_import" type="timestamp"/>
+            <column name="auto_import" type="boolean" defaultValue="false" />
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

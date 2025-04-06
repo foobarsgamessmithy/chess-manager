@@ -4,16 +4,17 @@ import eu.foobarssgamesmithy.chessmanager.service.user.data.UserDto;
 
 public class UserDtoFixtures {
 
-    public static UserDto aUser(){
+    public static UserDto aUser() {
         return UserDto.builder()
                 .userName("foobar")
                 .build();
     }
 
-    public static UserDto anotherUser(){
+    public static UserDto aOnlineUser() {
         return UserDto.builder()
-                .userName("drdrunkenstein")
+                .userName("MagnusC")
                 .lichessUsername("drdrunkenstein")
+                .autoImport(true)
                 .build();
     }
 

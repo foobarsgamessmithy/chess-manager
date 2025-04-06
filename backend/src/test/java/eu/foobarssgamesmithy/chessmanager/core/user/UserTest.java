@@ -2,6 +2,7 @@ package eu.foobarssgamesmithy.chessmanager.core.user;
 
 import eu.foobarssgamesmithy.chessmanager.auth.AuthenticationFacade;
 import eu.foobarssgamesmithy.chessmanager.core.mapper.BoEtyMapper;
+import eu.foobarssgamesmithy.chessmanager.core.mapper.MessageMapper;
 import eu.foobarssgamesmithy.chessmanager.core.messaging.MessagePublisher;
 import eu.foobarssgamesmithy.chessmanager.core.user.data.UserBo;
 import eu.foobarssgamesmithy.chessmanager.core.user.impl.UserImpl;
@@ -37,7 +38,7 @@ class UserTest {
     @BeforeEach
     void beforeEach(){
         this.underTest = new UserImpl(this.authenticationFacadeMock, this.repositoryMock,
-                Mappers.getMapper(BoEtyMapper.class), this.messagePublisherMock);
+                Mappers.getMapper(BoEtyMapper.class), this.messagePublisherMock, Mappers.getMapper(MessageMapper.class));
     }
 
     @Test
